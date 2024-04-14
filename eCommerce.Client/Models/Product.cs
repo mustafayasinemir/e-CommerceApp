@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Client.Models
 {
-    public class Product
+    public class ProductDetail
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
