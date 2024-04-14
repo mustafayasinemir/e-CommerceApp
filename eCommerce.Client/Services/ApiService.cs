@@ -26,7 +26,7 @@ namespace eCommerce.Client.Services
             var httpClient = new HttpClient();
             var json=JsonConvert.SerializeObject(register);
             var content=new StringContent(json,Encoding.UTF8,"application/json");
-            httpClient.PostAsync("");
+            
     }
     }
 }
