@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace eCommerce.Api.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240414152854_first")]
-    partial class first
+    [Migration("20240415234513_second")]
+    partial class second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -507,7 +507,6 @@ namespace eCommerce.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

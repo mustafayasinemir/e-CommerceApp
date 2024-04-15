@@ -12,39 +12,39 @@
                HeightRequest="100"
                WidthRequest="100" />
         <Label Grid.Row="1"
-               Text="Hello there! Ready to join us?"
+               Text="Merhaba! Alışverişin tadını çıkarmaya hazır mısın?"
                HorizontalOptions="Center" />
         <Frame Grid.Row="2"
                Padding="15"
                BackgroundColor="White">
             <VerticalStackLayout>
-                <Entry Placeholder="Name"
+                <Entry Placeholder="İsim"
                        x:Name="EntName" />
 
                 <Entry Placeholder="Email"
                        Keyboard="Email"
                        x:Name="EntEmail" />
 
-                <Entry Placeholder="Phone"
+                <Entry Placeholder="Telefon Numarası"
                        Keyboard="Telephone"
                        x:Name="EntPhone" />
 
-                <Entry Placeholder="Password"
+                <Entry Placeholder="Şifre"
                        IsPassword="True"
                        x:Name="EntPassword" />
             </VerticalStackLayout>
         </Frame>
 
         <Button Grid.Row="3"
-                Text="Sign Up"
+                Text="Kayıt Ol"
                 x:Name="BtnSignup"
                 Clicked="BtnSignup_Clicked"/>
         <HorizontalStackLayout Grid.Row="4"
                                Spacing="2"
                                HorizontalOptions="Center"
                                VerticalOptions="EndAndExpand">
-            <Label Text="Already have an account?" />
-            <Label Text="Sign In">
+            <Label Text="Hesabın var mı?" />
+            <Label Text="Kayıt Ol">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapLogin" />
                 </Label.GestureRecognizers>

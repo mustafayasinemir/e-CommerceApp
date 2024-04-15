@@ -8,7 +8,10 @@ using static System.Net.WebRequestMethods;
 namespace eCommerce.Client
 {
     public static class AppSettings
+
     {
-        public static string ApiUrl= "http://b.somee.com/";
+        //https://localhost:7029/
+        //http://bb.somee.com/
+        public static string ApiUrl= "https://localhost:7029/";
     }
 }

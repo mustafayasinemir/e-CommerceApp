@@ -1,4 +1,5 @@
-﻿using eCommerce.Api.Models;
+﻿using eCommerce.Api.DTOs;
+using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,22 @@ namespace eCommerce.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Register([FromBody] User user)
+        public IActionResult Register([FromBody] UserRegisterRequestDTO user)
         {
             var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
             if (userExists != null)
             {
                 return BadRequest("User with same email already exists");
             }
-            dbContext.Users.Add(user);
+            dbContext.Users.Add( new User
+            {
+                Name=user.Name,
+                Email = user.Email,
+                Phone =user.Name,
+                Password=user.Name,
+                
+
+            });
             dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);
         }
