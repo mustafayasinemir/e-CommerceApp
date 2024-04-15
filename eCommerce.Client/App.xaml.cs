@@ -1,4 +1,5 @@
-﻿namespace eCommerce.Client
+﻿using eCommerce.Client.Views;
+namespace eCommerce.Client
 {
     public partial class App : Application
     {
@@ -6,7 +7,7 @@
         {
             InitializeComponent();
 
-            MainPage = new SignupPage();
+            MainPage = new eCommerce.Client.Views.SignupPage();
         }
     }
 }
