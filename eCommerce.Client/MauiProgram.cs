@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using Microsoft.Extensions.Logging;
 
 namespace eCommerce.Client
 {
+    
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()

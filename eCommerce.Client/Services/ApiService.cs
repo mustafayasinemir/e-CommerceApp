@@ -45,7 +45,7 @@ namespace eCommerce.Client.Services
             var json = JsonConvert.SerializeObject(login);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             //Login-login
-            var response = await httpClient.PostAsync(AppSettings.ApiUrl+"api/users/login,content",content);
+            var response = await httpClient.PostAsync(AppSettings.ApiUrl+"api/users/login",content);
 
             if (!response.IsSuccessStatusCode) return false;
            

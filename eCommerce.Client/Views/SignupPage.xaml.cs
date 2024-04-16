@@ -10,16 +10,21 @@ public partial class SignupPage : ContentPage
 	}
 
     private async void BtnSignup_Clicked(object sender, EventArgs e)
-    {
-		var response =await ApiService.RegisterUser(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
-		if(response)
+	{
+		var response = await ApiService.RegisterUser(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
+		if (response)
 		{
-			await DisplayAlert("", "Hesap oluþturma iþlemi baþarýlý !", "Tamam");
+			await DisplayAlert("", "Your account has been created", "Alright");
+			await Navigation.PushAsync(new LoginPage());
 		}
 		else
 		{
-			await DisplayAlert("", "Üzgünüz! Hesap oluþturulamadý!", "Tamam");
-		}
+            await DisplayAlert("", "Oops something went wrong", "Cancel");
+        }
     }
 
+    private async void TapLogin_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new LoginPage());
+    }
 }

@@ -1,8 +1,8 @@
 ﻿namespace eCommerce.Client
 {
-    public partial class SignupPage : Shell
+    public partial class AppShell : Shell
     {
-        public SignupPage()
+        public AppShell()
         {
             InitializeComponent();
         }

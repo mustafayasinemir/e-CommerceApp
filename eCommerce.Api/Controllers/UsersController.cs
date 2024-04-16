@@ -15,40 +15,41 @@ namespace eCommerce.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private ApiDbContext dbContext;
+        private ApiDbContext _dbContext;
         private IConfiguration _config;
 
         public UsersController(ApiDbContext dbContext, IConfiguration config)
         {
             _config = config;
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         [HttpPost("[action]")]
         public IActionResult Register([FromBody] UserRegisterRequestDTO user)
         {
-            var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
+            var userExists = _dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
             if (userExists != null)
             {
-                return BadRequest("User with same email already exists");
+                return BadRequest("Aynı E-Postaya sahip kullanıcı zaten mevcut");
             }
-            dbContext.Users.Add( new User
+            _dbContext.Users.Add(new User
             {
-                Name=user.Name,
+                Name = user.Name,
                 Email = user.Email,
-                Phone =user.Name,
-                Password=user.Name,
-                
+                Phone= user.Phone,
+                Password = user.Password,
 
-            });
-            dbContext.SaveChanges();
+
+            }); 
+ 
+            _dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);
         }
 
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] UserLoginRequestDTO user)
         {
-            var currentUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+            var currentUser = _dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (currentUser == null)
             {
                 return NotFound();
@@ -83,7 +84,7 @@ namespace eCommerce.Api.Controllers
         public  IActionResult UploadUserPhoto(IFormFile image)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
+            var user = _dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
 
             if (user == null)
             {
@@ -105,7 +106,7 @@ namespace eCommerce.Api.Controllers
                 user.ImageUrl = "/userimages/" + uniqueFileName; // This assumes your web root is at the project root
 
                 // Save the changes to the database
-                dbContext.SaveChanges();
+                _dbContext.SaveChanges();
 
                 return Ok("Image uploaded successfully");
             }
@@ -120,9 +121,9 @@ namespace eCommerce.Api.Controllers
         public IActionResult UserProfileImage()
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
+            var user = _dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
             if (user == null) return NotFound();
-            var responseResult = dbContext.Users
+            var responseResult = _dbContext.Users
                 .Where(x => x.Email == userEmail)
                 .Select(x => new
                 {

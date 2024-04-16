@@ -1,4 +1,6 @@
-﻿using eCommerce.Client.Views;
+﻿
+using eCommerce.Client.Views;
+
 namespace eCommerce.Client
 {
     public partial class App : Application
@@ -7,7 +9,18 @@ namespace eCommerce.Client
         {
             InitializeComponent();
 
-            MainPage = new eCommerce.Client.Views.SignupPage();
+            var accesstoken = Preferences.Get("accesstoken", string.Empty);
+            if (string.IsNullOrEmpty(accesstoken))
+            {
+                MainPage = new NavigationPage(new SignupPage());
+            }
+            else
+            {
+                MainPage = new AppShell();
+            }
         }
     }
 }
+
+    
+
