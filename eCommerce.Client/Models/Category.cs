@@ -16,5 +16,7 @@ namespace eCommerce.Client.Models
         public string Name { get; set; }
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
+        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
+
     }
 }
