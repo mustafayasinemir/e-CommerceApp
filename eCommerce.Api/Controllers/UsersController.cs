@@ -25,29 +25,21 @@ namespace eCommerce.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Register([FromBody] UserRegisterRequestDTO user)
+        public IActionResult Register([FromBody] User user)
         {
             var userExists = _dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
             if (userExists != null)
             {
                 return BadRequest("Aynı E-Postaya sahip kullanıcı zaten mevcut");
             }
-            _dbContext.Users.Add(new User
-            {
-                Name = user.Name,
-                Email = user.Email,
-                Phone= user.Phone,
-                Password = user.Password,
+            _dbContext.Users.Add(user);
 
-
-            }); 
- 
             _dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);
         }
 
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody] UserLoginRequestDTO user)
+        public IActionResult Login([FromBody] UserLoginDTO user)
         {
             var currentUser = _dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (currentUser == null)
@@ -81,7 +73,7 @@ namespace eCommerce.Api.Controllers
 
         [Authorize]
         [HttpPost("uploadphoto")]
-        public  IActionResult UploadUserPhoto(IFormFile image)
+        public IActionResult UploadUserPhoto(IFormFile image)
         {
             var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var user = _dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
@@ -99,7 +91,7 @@ namespace eCommerce.Api.Controllers
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                     image.CopyTo(stream);
+                    image.CopyTo(stream);
                 }
 
                 // Update the user's ImageUrl property with the URL of the uploaded image
@@ -134,3 +126,4 @@ namespace eCommerce.Api.Controllers
         }
     }
 }
+
