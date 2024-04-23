@@ -24,5 +24,7 @@ namespace eCommerce.Client.Models
 
         [JsonProperty("customerId")]
         public string CustomerId { get; set; }
+
+      
     }
 }

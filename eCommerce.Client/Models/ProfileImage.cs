@@ -12,6 +12,7 @@ namespace eCommerce.Client.Models
     {
         [JsonProperty("image_url")]
         public string ImageUrl { get; set; }
+        public string FullImageUrl => AppSettings.ApiUrl + ImageUrl;
 
     }
 }
