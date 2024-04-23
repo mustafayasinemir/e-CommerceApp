@@ -60,7 +60,7 @@ namespace eCommerce.Client.Services
 
         }
 
-        public static async Task<ProfileImage>GetUserProfileImage()
+        public static  async Task<ProfileImage>GetUserProfileImage()
         {
             var httpClient=new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accestoken", string.Empty));
@@ -83,7 +83,7 @@ namespace eCommerce.Client.Services
 
         }
 
-        public static async Task<List<Category>> GetCategories()
+        public  static async Task<List<Category>> GetCategories()
         {
 
             var httpClient = new HttpClient();
@@ -93,7 +93,7 @@ namespace eCommerce.Client.Services
 
         }
 
-        public static async Task <List<ProductDetail>> GetProducts(string productType ,string categoryId)
+        public  static async Task <List<ProductDetail>> GetProducts(string productType ,string categoryId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accestoken", string.Empty));
@@ -102,7 +102,7 @@ namespace eCommerce.Client.Services
 
         }
 
-        public static async Task<ProductDetail> GetProductDetail(int productId)
+        public  static async Task<ProductDetail> GetProductDetail(int productId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accestoken", string.Empty));
@@ -134,7 +134,7 @@ namespace eCommerce.Client.Services
 
         }
 
-        #region UpdateCartQuantity
+        
 
         public static async Task<bool> UpdateCartQuantity(int productId, string action)
         {
@@ -148,8 +148,7 @@ namespace eCommerce.Client.Services
             if (!response.IsSuccessStatusCode) return false;
             return true;
         }
-        #endregion
-
+       
 
         public static async Task<bool> PlaceOrder(Orders orders)
         {
