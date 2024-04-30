@@ -1,6 +1,8 @@
+In this project, I aimed to experiment with different cloud environments and gain experience in communicating between various services. I developed a mobile application using Microsoft's new technology MAUI (Multi-platform App UI). My application focused on communicating using a database hosted on Azure and with a web service running on Docker in a Google Cloud environment.(Development is continue)
 
-It is a project I have done to improve myself by working with cloud environments.
+<p align="center">
+  <img src="https://github.com/myemirrr/e-CommerceApp/assets/77809017/968d0e90-20b7-4743-9993-714ce4def771" alt="Ekran görüntüsü 2024-04-30 220050" width="300"/>
+  <img src="https://github.com/myemirrr/e-CommerceApp/assets/77809017/75186ba8-57b5-4d35-bdc0-3659bf28d6f2" alt="Ekran görüntüsü 2024-04-30 220102" width="300"/>
+  <img src="https://github.com/myemirrr/e-CommerceApp/assets/77809017/e303f133-1d0b-4bf0-b47c-04e228d43360" alt="Ekran görüntüsü 2024-04-30 220118" width="300"/>
+</p>
 
-![Ekran görüntüsü 2024-04-30 220050](https://github.com/myemirrr/e-CommerceApp/assets/77809017/275971fe-ac70-49e7-87e6-91cfcd2f5251)
-![Ekran görüntüsü 2024-04-30 220102](https://github.com/myemirrr/e-CommerceApp/assets/77809017/d2dc7762-14c0-4592-ae3a-eb307c068afd)
-![Ekran görüntüsü 2024-04-30 220118](https://github.com/myemirrr/e-CommerceApp/assets/77809017/08c096d5-1da1-4dc3-8f78-5cf38cb7a358)
