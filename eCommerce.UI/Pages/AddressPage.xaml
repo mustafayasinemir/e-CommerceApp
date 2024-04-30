@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.AddressPage"
+             Title="Adres Sayfası">
+
+    <VerticalStackLayout Margin="20"
+                         Spacing="10"
+                         VerticalOptions="Start">
+        <Label Text="Teslimat Adresi"
+               HorizontalOptions="Center"
+               FontSize="Large" />
+
+        <Frame Padding="10"
+               BackgroundColor="White">
+            <VerticalStackLayout>
+
+                <Entry Placeholder="İsim+Soyisim"
+                       x:Name="EntName" />
+
+                <Entry Placeholder="Telefon Numarası"
+                       x:Name="EntPhone" />
+
+                <Entry Placeholder="Adres"
+                       HeightRequest="100"
+                       x:Name="EntAddress" />
+
+            </VerticalStackLayout>
+        </Frame>
+        <Button x:Name="BtnSave"
+                Text="Kaydet"
+                FontSize="Medium" 
+                Clicked="BtnSave_Clicked"
+                BorderColor="#18565f"/>
+
+    </VerticalStackLayout>
+</ContentPage>
