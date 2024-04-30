@@ -1,4 +1,5 @@
-﻿namespace eCommerce.Client
+﻿
+namespace eCommerce.Client
 {
     public partial class AppShell : Shell
     {

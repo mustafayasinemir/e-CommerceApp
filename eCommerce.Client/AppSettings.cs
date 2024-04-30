@@ -12,8 +12,8 @@ namespace eCommerce.Client
     {
         //https://localhost:7029/
         //http://bb.somee.com/
+        //https://localhost:7029/swagger/index.html
 
-
-        public static string ApiUrl= "http://192.168.1.102:5039/";
+        public static string ApiUrl = "http://localhost:5039/";
     }
 }

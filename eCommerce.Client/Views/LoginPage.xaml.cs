@@ -14,7 +14,7 @@ public partial class LoginPage : ContentPage
         var response = await ApiService.Login(EntEmail.Text, EntPassword.Text);
         if (response)
         {
-            Application.Current.MainPage = new AppShell();  
+            Application.Current.MainPage = new MainPage();  
         }
         else
         {

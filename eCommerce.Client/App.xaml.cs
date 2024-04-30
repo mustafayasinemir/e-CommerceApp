@@ -22,5 +22,3 @@ namespace eCommerce.Client
     }
 }
 
-    
-
