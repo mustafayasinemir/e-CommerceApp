@@ -40,7 +40,7 @@ namespace eCommerce.Api.Controllers
             }
             else
             {
-                return BadRequest("Invalid product type");
+                return BadRequest("Geçersiz Ürün Türü ! ");
             }
 
             var productData = products.Select(v => new

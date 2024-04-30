@@ -80,7 +80,7 @@ namespace eCommerce.Api.Controllers
 
             if (user == null)
             {
-                return NotFound("User not found");
+                return NotFound("Kullanıcı Bulunumadı !");
             }
 
             if (image != null)
@@ -100,10 +100,10 @@ namespace eCommerce.Api.Controllers
                 // Save the changes to the database
                 _dbContext.SaveChanges();
 
-                return Ok("Image uploaded successfully");
+                return Ok("Görsel Yükleme Başarılı");
             }
 
-            return BadRequest("No image provided");
+            return BadRequest("Görüntü Yüklenmedi");
         }
 
 

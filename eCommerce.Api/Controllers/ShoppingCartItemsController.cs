@@ -75,11 +75,6 @@ namespace eCommerce.Api.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
-        // PUT /api/ShoppingCartItems?productId = 1 & action = "increase"
-        // PUT /api/ShoppingCartItems?productId = 1 & action = "decrease"
-        // PUT /api/ShoppingCartItems?productId = 1 & action = "delete"
-
-       // [HttpPut("{productId}/{action}")]
         [HttpPut]
         public IActionResult Put(int productId, string action)
         {
@@ -117,7 +112,7 @@ namespace eCommerce.Api.Controllers
                 else
                 {
                     // Return a response indicating an invalid action.
-                    return BadRequest("Invalid action. Use 'increase', 'decrease', or 'delete'.");
+                    return BadRequest("Geçersiz Eylemde Bulundunuz ! ");
                 }
 
                 shoppingCart.TotalAmount = shoppingCart.Price * shoppingCart.Qty;
