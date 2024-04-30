@@ -8,6 +8,8 @@
     Shell.TabBarBackgroundColor="#18565f"
     Shell.TabBarTitleColor="White"
     Shell.TabBarUnselectedColor="FloralWhite">
+    
+    
 
 
     <TabBar>

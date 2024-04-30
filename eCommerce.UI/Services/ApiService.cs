@@ -12,26 +12,25 @@ namespace eCommerce.UI.Services
 {
     public static class ApiService
     {
-        public static async Task<ProfileImage> GetUserProfileImage()
-        {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl+"api/users/profileimage");
-            return JsonConvert.DeserializeObject<ProfileImage>(response);
-        }
-
-        public static async Task<bool> UploadUserImage(byte[] imageArray)
+        public static  async Task<bool> UploadUserImage(byte[] imageArray)
         {
 
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
             var content = new MultipartFormDataContent();
             content.Add(new ByteArrayContent(imageArray), "Image", "image.jpg");
-            var response = await httpClient.PostAsync(AppSettings.ApiUrl+"api/users/uploadphoto", content);
+            var response = await httpClient.PostAsync(AppSettings.ApiUrl + "api/users/uploadphoto", content);
             if (!response.IsSuccessStatusCode) return false;
             return true;
         }
 
+        public static async Task<ProfileImage> GetUserProfileImage()
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
+            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/users/profileimage");
+            return JsonConvert.DeserializeObject<ProfileImage>(response);
+        }
         public static async Task<List<Category>> GetCategories()
         {
             var httpClient = new HttpClient();

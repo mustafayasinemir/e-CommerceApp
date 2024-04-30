@@ -26,6 +26,8 @@ public partial class ProfilePage : ContentPage
                 }
             }
         }
+
+
         var response = await ApiService.UploadUserImage(imageArray);
         if (response)
         {
