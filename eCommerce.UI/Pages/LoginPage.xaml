@@ -12,7 +12,7 @@
                HeightRequest="100"
                WidthRequest="100" />
         <Label Grid.Row="1"
-               Text="Welcome back, you have been missed"
+               Text="Tekrar Hoşgeldin! Seni Özledik! "
                HorizontalOptions="Center" />
         <Frame Grid.Row="2"
                Padding="15"

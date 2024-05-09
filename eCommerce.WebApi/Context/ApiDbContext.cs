@@ -9,9 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 
     }
-
         public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories {get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -23,7 +22,7 @@ using Microsoft.EntityFrameworkCore;
 
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Elektronik Aletler", ImageUrl = "elektronik.jpg" },
-                new Category { Id = 2, Name = "Süpermarket", ImageUrl = "süpermarket.jpg" },
+                new Category { Id = 2, Name = "Süpermarket", ImageUrl = "spr.png" },
                 new Category { Id = 3, Name = "Erkek", ImageUrl = "erkek.png" },
                 new Category { Id = 4, Name = "Kadın", ImageUrl = "kadın.png" },
                 new Category { Id = 5, Name = "Kozmetik", ImageUrl = "kozmetik.jpg" }

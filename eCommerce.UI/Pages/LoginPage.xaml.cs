@@ -13,6 +13,11 @@ public partial class LoginPage : ContentPage
     {
         var LoginService=new LoginService();
         var response = await LoginService.Login(EntEmail.Text, EntPassword.Text);
+        if (EntEmail.Equals("admin@gmail.com") && EntPassword.Equals("admin"))
+        {
+            //Application.Current.MainPage = new AdmninHomePage();
+
+        }
         if (response)
         {
             Application.Current.MainPage = new AppShell();  

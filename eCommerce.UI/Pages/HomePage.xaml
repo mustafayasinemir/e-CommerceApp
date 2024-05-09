@@ -94,21 +94,21 @@
 
                             <Border VerticalOptions="Start"
                                     StrokeShape="RoundRectangle 10,10,10,10">
-                                <!-- Product Image -->
+                            
                                 <Image Aspect="AspectFill"
                                        HeightRequest="140"
                                        WidthRequest="140"
                                        Source="{Binding FullImageUrl}" />
                             </Border>
 
-                            <!-- Product Name -->
+                         
                             <Label Grid.Row="1"
                                    FontAttributes="Bold"
                                    LineBreakMode="WordWrap"
                                    MaxLines="2"
                                    Text="{Binding Name}" />
 
-                            <!-- Product Price -->
+                           
                             <Label Grid.Row="2"
                                    Text="{Binding Price,StringFormat='{0:C}'}" />
                         </Grid>

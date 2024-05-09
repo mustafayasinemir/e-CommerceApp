@@ -9,7 +9,7 @@ namespace eCommerce.UI.Services
         public async Task<bool> Login(string email, string password)
         {
             var login = new Login()
-            {
+            { 
                 Email = email,
                 Password = password
             };
