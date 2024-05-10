@@ -3,65 +3,58 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace eCommerce.Api.Controllers
+namespace eCommerce.Api.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class ProductsController(ApiDbContext dbContext) : ControllerBase
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    [HttpGet]
+    public IActionResult GetProducts(string productType, int? categoryId = null)
     {
-        private ApiDbContext dbContext;
-        public ProductsController(ApiDbContext dbContext)
+        var products = dbContext.Products.AsQueryable();
+
+        if (productType == "category" && categoryId != null)
         {
-            this.dbContext = dbContext;
+            products = products.Where(v => v.CategoryId == categoryId);
+        }
+        else if (productType == "trending")
+        {
+            products = products.Where(v => v.IsTrending == true);
+        }
+        else if (productType == "bestselling")
+        {
+            products = products.Where(v => v.IsBestSelling == true);
+        }
+        else
+        {
+            return BadRequest("Geçersiz Ürün Türü ! ");
         }
 
-        [HttpGet]
-        public IActionResult GetProducts(string productType, int? categoryId = null)
+        var productData = products.Select(v => new
         {
-            var products = dbContext.Products.AsQueryable();
+            Id = v.Id,
+            Name = v.Name,
+            Price = v.Price,
+            ImageUrl = v.ImageUrl
+        });
 
-            if (productType == "category" && categoryId != null)
-            {
-                products = products.Where(v => v.CategoryId == categoryId);
-            }
-            else if (productType == "trending")
-            {
-                products = products.Where(v => v.IsTrending == true);
-            }
-            else if (productType == "bestselling")
-            {
-                products = products.Where(v => v.IsBestSelling == true);
-            }
-            else
-            {
-                return BadRequest("Geçersiz Ürün Türü ! ");
-            }
+        return Ok(productData);
+    }
 
-            var productData = products.Select(v => new
-            {
-                Id = v.Id,
-                Name = v.Name,
-                Price = v.Price,
-                ImageUrl = v.ImageUrl
-            });
-
-            return Ok(productData);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetProductDetail(int id)
+    [HttpGet("{id}")]
+    public IActionResult GetProductDetail(int id)
+    {
+        var product = dbContext.Products.Where(p => p.Id == id);
+        var productData = product.Select(v => new
         {
-            var product = dbContext.Products.Where(p => p.Id == id);
-            var productData = product.Select(v => new
-            {
-                Id = v.Id,
-                Name = v.Name,
-                Price = v.Price,
-                Detail = v.Detail,
-                ImageUrl = v.ImageUrl
-            }).FirstOrDefault();
-            return Ok(productData);
-        }
+            Id = v.Id,
+            Name = v.Name,
+            Price = v.Price,
+            Detail = v.Detail,
+            ImageUrl = v.ImageUrl
+        }).FirstOrDefault();
+        return Ok(productData);
     }
 }
