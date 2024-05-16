@@ -84,7 +84,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\AdminPage\CategoryAdminPage\CategoryPage.xaml.cs">
+	    <DependentUpon>CategoryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\AdminPage\CategoryAdminPage\CategoryUpdatePage.xaml.cs">
+	    <DependentUpon>CategoryUpdatePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\AdminPage\CategoryAdminPage\CategoryRemove.xaml.cs">
+	    <DependentUpon>CategoryRemove.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Pages\AddressPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AdminPage\CategoryAdminPage\CategoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AdminPage\CategoryAdminPage\CategoryAdded.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AdminPage\CategoryAdminPage\CategoryRemove.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\CartPage.xaml">
@@ -118,5 +139,11 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\AdminPage\ProductAdminPage\" />
+	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptioneCommerceUIHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

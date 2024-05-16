@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Security.Claims;
 using System.Text;
 
@@ -30,7 +31,7 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
     }
 
     [HttpPost("[action]")]
-    public IActionResult Login([FromBody] UserLoginDTO user)
+    public IActionResult Login([FromBody] User user)
     {
         var currentUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
         if (currentUser == null)
@@ -41,7 +42,8 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim(ClaimTypes.Email , user.Email)
+            new Claim(ClaimTypes.Email , user.Email),
+            new Claim(ClaimTypes.Role,user.Role)
         };
 
         var token = new JwtSecurityToken(
@@ -64,7 +66,7 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
 
     [Authorize]
     [HttpPost("uploadphoto")]
-    public IActionResult UploadUserPhoto(IFormFile image)
+    public async Task<IActionResult> UploadUserPhoto(IFormFile image)
     {
         var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
@@ -76,10 +78,14 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
 
         if (image != null)
         {
-            // Generate a unique filename for the uploaded image (e.g., using a GUID)
+            
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
             string filePath = Path.Combine("wwwroot/userimages", uniqueFileName);
+            //---Farklı Alternatif---
 
+            //var memoryStream = new MemoryStream();
+            //await image.CopyToAsync(memoryStream);
+            //await System.IO.File.WriteAllBytesAsync(filePath, memoryStream.ToArray());
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 image.CopyTo(stream);
@@ -98,21 +104,20 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
     }
 
 
-
     [Authorize]
     [HttpGet("profileimage")]
-    public IActionResult UserProfileImage()
+    public async Task<IActionResult> UserProfileImage()
     {
         var userEmail = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
         if (user == null) return NotFound();
-        var responseResult = dbContext.Users
+        var responseResult = await dbContext.Users
             .Where(x => x.Email == userEmail)
             .Select(x => new
             {
                 x.ImageUrl,
             })
-            .SingleOrDefault();
+            .FirstOrDefaultAsync();
         return Ok(responseResult);
     }
 }

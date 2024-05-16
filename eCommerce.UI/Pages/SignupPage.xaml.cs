@@ -1,4 +1,4 @@
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.RegisterService;
 
 namespace eCommerce.UI.Pages;
 

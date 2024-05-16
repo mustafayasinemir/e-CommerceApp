@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Api.Controllers;
 
-[Authorize]
+
 [Route("api/[controller]")]
+[Authorize(Roles = "admin,customer")]
 [ApiController]
 public class ProductsController(ApiDbContext dbContext) : ControllerBase
 {

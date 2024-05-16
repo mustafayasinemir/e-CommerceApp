@@ -1,20 +1,20 @@
 using eCommerce.UI.Models;
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.FavoriteService;
 
 namespace eCommerce.UI.Pages;
 
 public partial class FavoritesPage : ContentPage
 {
-    private BookmarkItemService bookmarkItemService;
+    private FavoriteService favoriteService;
     public FavoritesPage()
     {
         InitializeComponent();
-        bookmarkItemService = new BookmarkItemService();
+        favoriteService = new FavoriteService();
     }
 
     private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var currentSelection = e.CurrentSelection.FirstOrDefault() as BookmarkedProduct;
+        var currentSelection = e.CurrentSelection.FirstOrDefault() as FavoriProduct;
         if (currentSelection == null) return;
         Navigation.PushAsync(new ProductDetailPage(currentSelection.ProductId));
         ((CollectionView)sender).SelectedItem = null;
@@ -28,7 +28,7 @@ public partial class FavoritesPage : ContentPage
 
     private void GetFavoriteProducts()
     {
-        var favoriteProducts = bookmarkItemService.ReadAll();
+        var favoriteProducts = favoriteService.ReadAll();
         CvProducts.ItemsSource = favoriteProducts;
     }
 }

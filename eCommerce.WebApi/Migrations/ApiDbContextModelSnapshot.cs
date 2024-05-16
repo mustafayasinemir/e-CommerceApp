@@ -51,7 +51,7 @@ namespace eCommerce.Api.Migrations
                         new
                         {
                             Id = 2,
-                            ImageUrl = "süpermarket.jpg",
+                            ImageUrl = "spr.png",
                             Name = "Süpermarket"
                         },
                         new
@@ -145,6 +145,9 @@ namespace eCommerce.Api.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -165,6 +168,12 @@ namespace eCommerce.Api.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("RemoveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -224,6 +233,10 @@ namespace eCommerce.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

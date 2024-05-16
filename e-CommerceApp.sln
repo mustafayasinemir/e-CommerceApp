@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.UI", "eCommerce.UI\eCommerce.UI.csproj", "{EFA5D347-86DF-493D-A586-1CF47ABCA576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce.Api", "eCommerce.WebApi\eCommerce.Api.csproj", "{0254ACF5-FE26-4793-868C-6E14DD56AF56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Api", "eCommerce.WebApi\eCommerce.Api.csproj", "{0254ACF5-FE26-4793-868C-6E14DD56AF56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@ namespace eCommerce.UI.Services
 {
     public static class ApiService
     {
-        public static  async Task<bool> UploadUserImage(byte[] imageArray)
+        public static async Task<bool> UploadUserImage(byte[] imageArray)
         {
 
             var httpClient = new HttpClient();

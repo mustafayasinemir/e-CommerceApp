@@ -1,5 +1,6 @@
 using eCommerce.UI.Models;
 using eCommerce.UI.Services;
+using eCommerce.UI.Services.FavoriteService;
 
 namespace eCommerce.UI.Pages;
 
@@ -7,7 +8,7 @@ public partial class ProductDetailPage : ContentPage
 {
     private int productId;
     private string imageUrl;
-    private BookmarkItemService bookmarkItemService = new BookmarkItemService();
+    private FavoriteService favoriteService = new FavoriteService();
     public ProductDetailPage(int productId)
     {
         InitializeComponent();
@@ -72,30 +73,30 @@ public partial class ProductDetailPage : ContentPage
 
     private void ImgBtnFavorite_Clicked(object sender, EventArgs e)
     {
-        var existingBookmark = bookmarkItemService.Read(productId);
+        var existingBookmark = favoriteService.Read(productId);
         if (existingBookmark != null)
         {
-            bookmarkItemService.Delete(existingBookmark);
+            favoriteService.Delete(existingBookmark);
         }
         else
         {
-            var bookmarkedProduct = new BookmarkedProduct()
+            var bookmarkedProduct = new FavoriProduct()
             {
                 ProductId = productId,
-                IsBookmarked = true,
+                IsFavori = true,
                 Detail = LblProductDescription.Text,
                 Name = LblProductName.Text,
                 Price = Convert.ToInt32(LblProductPrice.Text),
                 ImageUrl = imageUrl
             };
 
-            bookmarkItemService.Create(bookmarkedProduct);
+            favoriteService.Create(bookmarkedProduct);
         }
         UpdateFavoriteButton();
     }
     private void UpdateFavoriteButton()
     {
-        var existingBookmark = bookmarkItemService.Read(productId);
+        var existingBookmark = favoriteService.Read(productId);
         if (existingBookmark != null)
         {
             ImgBtnFavorite.Source = "heartfill";

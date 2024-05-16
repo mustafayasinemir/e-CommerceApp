@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:eCommerce.UI.Pages"
+    xmlns:adminPages="clr-namespace:eCommerce.UI.Pages.AdminPage"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="#18565f"
     Shell.TabBarTitleColor="White"
@@ -27,6 +28,10 @@
 
         <Tab Title="Profil" Icon="profile">
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}"/>
+        </Tab>
+
+        <Tab Title="Kategori İşlemleri" Icon="profile">
+            <ShellContent ContentTemplate="{DataTemplate adminPages:CategoryAddPage}"/>
         </Tab>
     </TabBar>
 

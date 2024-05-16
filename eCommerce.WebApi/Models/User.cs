@@ -10,6 +10,7 @@ namespace eCommerce.Api.Models
         public string? Phone { get; set; }
         public string? Password { get; set; }
         public string? ImageUrl { get; set; }
+        public string Role { get; set; } = "customer";
 
         [NotMapped]
         public IFormFile? Image { get; set; }

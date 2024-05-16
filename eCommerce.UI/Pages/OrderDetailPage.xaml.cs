@@ -4,6 +4,7 @@ namespace eCommerce.UI.Pages;
 
 public partial class OrderDetailPage : ContentPage
 {
+    OrderDetailsService orderDetailsService =new OrderDetailsService();
     public OrderDetailPage(int orderId, int totalPrice)
     {
         InitializeComponent();
