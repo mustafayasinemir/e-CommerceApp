@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.AdminPage.AdminCategoryRemove">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label 
+                Text="Kategorileri Sil"
+                FontSize="Large"
+                HorizontalOptions="Center" />
+
+            <ListView x:Name="CategoryListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button 
+                Text="Kategoriyi Sil"
+                BackgroundColor="DarkRed"
+                TextColor="White"
+                Clicked="OnRemoveCategoryButtonClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

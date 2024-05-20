@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.AdminPage.AdminCategoryAdded">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label 
+                Text="Kategori Ekleme"
+                FontSize="Large"
+                HorizontalOptions="Center" />
+
+            <Label Text="Kategori Adı" />
+            <Entry x:Name="CategoryNameEntry" Placeholder="Kategori adını giriniz" />
+
+            <Label Text="Resim URL " />
+            <Editor x:Name="CategoryDescriptionEditor" Placeholder="Kategori Resim URL giriniz" AutoSize="TextChanges" />
+
+            <Button 
+                Text="Kategoriyi Ekle"
+                BackgroundColor="#18565f"
+                TextColor="White"
+                Clicked="OnAddCategoryButtonClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

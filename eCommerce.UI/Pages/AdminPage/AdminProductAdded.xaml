@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.AdminPage.AdminProductAdded">
+    <VerticalStackLayout>
+        <Label Text="Ürün Adı" />
+        <Entry x:Name="ProductNameEntry" Placeholder="Ürün adını giriniz" />
+
+        <Label Text="Ürün Detayı" />
+        <Entry x:Name="ProductDetailEntry" Placeholder="Ürün detayını giriniz" />
+
+        <Label Text="Resim URL" />
+        <Entry x:Name="ProductImageURLEntry" Placeholder="Ürün Resim URL giriniz" />
+
+        <Label Text="Ürün Kategorisini Seçiniz" />
+        <Picker x:Name="CategoryPicker">
+            
+        </Picker>
+
+        <Label Text="Fiyat Giriniz" />
+        <Entry x:Name="ProductPriceEntry" Placeholder="Ürün fiyatını giriniz" Keyboard="Numeric" />
+
+        <Label Text="En Çok Satan (true/false)" />
+        <Switch x:Name="BestSellingSwitch" />
+
+        <Label Text="Trend (true/false)" />
+        <Switch x:Name="TrendSwitch" />
+
+        <Label Text="Oluşturma Tarihi" />
+        <DatePicker x:Name="CreationDatePicker" />
+
+        <Button 
+            Text="Ürün Ekle"
+            BackgroundColor="#18565f"
+            TextColor="White"
+            Clicked="OnAddProductButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>
