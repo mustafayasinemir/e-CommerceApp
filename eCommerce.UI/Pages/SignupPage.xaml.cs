@@ -14,6 +14,11 @@ public partial class SignupPage : ContentPage
         RegisterService RegisterService =new RegisterService();
 
 		var response = await RegisterService.RegisterUser(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
+
+		if(EntEmail.Text is not null && EntPassword.Text.Length>=6 && EntName.Text is not null && EntPhone.Text is not null)
+		{
+			await DisplayAlert("Hata", "Kayýt olurken þifreniz en az 6 karakter olmalýdýr,Tüm alanlarý lütfen doldurunuz !","Tamam");
+		}
 		if (response)
 		{
 			await DisplayAlert("", "Hesabýnýz oluþturuldu", "Tamam");

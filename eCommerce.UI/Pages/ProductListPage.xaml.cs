@@ -5,6 +5,7 @@ namespace eCommerce.UI.Pages;
 
 public partial class ProductListPage : ContentPage
 {
+    private ApiService apiService = new ApiService();
     public ProductListPage(int categoryId)
     {
         InitializeComponent();
@@ -13,7 +14,7 @@ public partial class ProductListPage : ContentPage
 
     private async void GetProducts(int categoryId)
     {
-        var products = await ApiService.GetProducts("category", categoryId.ToString());
+        var products = await apiService.GetProducts("category", categoryId.ToString());
         CvProducts.ItemsSource = products;
     }
 

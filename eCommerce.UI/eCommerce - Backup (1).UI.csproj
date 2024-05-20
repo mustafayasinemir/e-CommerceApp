@@ -56,10 +56,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\spr.png" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <None Remove="Resources\Images\admin.jpg" />
 	  <None Remove="Resources\Images\cart.png" />
 	  <None Remove="Resources\Images\delete.png" />
 	  <None Remove="Resources\Images\edit.png" />
@@ -72,15 +69,8 @@
 	  <None Remove="Resources\Images\profile.png" />
 	  <None Remove="Resources\Images\profilesettings.png" />
 	  <None Remove="Resources\Images\rightarrow.png" />
-	  <None Remove="Resources\Images\spr.png" />
+	  <None Remove="Resources\Images\storelogo.png" />
 	  <None Remove="Resources\Images\uploadphoto.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="Resources\Images\spr.png">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -98,22 +88,19 @@
 	  <MauiXaml Update="Pages\AddressPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AdminPage\AdminCategoryAdded.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\AdminPage\AdminCategoryRemove.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AdminPage\AdminHomePage.xaml">
+	  <MauiXaml Update="Pages\AdminPage\AdminCategoryUpdate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AdminPage\AdminProductAdded.xaml">
+	  <MauiXaml Update="Pages\AdminPage\AdminPageHome.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AdminPage\AdminProductRemove.xaml">
+	  <MauiXaml Update="Pages\AdminPage\AdminRemoveProduct.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AdminPage\AdminProductUpdate.xaml">
+	  <MauiXaml Update="Pages\AdminPage\AdminUpdateProduct.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\CartPage.xaml">

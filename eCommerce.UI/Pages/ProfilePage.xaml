@@ -35,7 +35,6 @@
                                           Tapped="TapOrders_Tapped"/>
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
-
             <Border HeightRequest="1"
                     BackgroundColor="Gray" />
             <HorizontalStackLayout Spacing="10">
@@ -44,6 +43,13 @@
                 <Label Text="Bilgilerim"
                        FontSize="Medium" />
             </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="profilesettings"
+           HeightRequest="25" />
+                <Label Text="Şifre Değiştir"
+           FontSize="Medium" />
+            </HorizontalStackLayout>
+
             <Border HeightRequest="1"
                     BackgroundColor="Gray" />
             <HorizontalStackLayout Spacing="10">
@@ -52,6 +58,7 @@
                 <Label Text="Sıkça Sorulan Sorular ? "
                        FontSize="Medium" />
             </HorizontalStackLayout>
+
         </VerticalStackLayout>
         <Button Grid.Row="2"
                 Text="Çıkış Yap"

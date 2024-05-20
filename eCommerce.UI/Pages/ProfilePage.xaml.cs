@@ -4,7 +4,9 @@ namespace eCommerce.UI.Pages;
 
 public partial class ProfilePage : ContentPage
 {
+    ApiService apiService =new ApiService();
     private byte[] imageArray;
+
     public ProfilePage()
     {
         InitializeComponent();
@@ -28,7 +30,7 @@ public partial class ProfilePage : ContentPage
         }
 
 
-        var response = await ApiService.UploadUserImage(imageArray);
+        var response = await apiService.UploadUserImage(imageArray);
         if (response)
         {
             await DisplayAlert("", "Fotoðraf Yükleme Baþarýlý", "Tamam");
@@ -43,7 +45,7 @@ public partial class ProfilePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        var response = await ApiService.GetUserProfileImage();
+        var response = await apiService.GetUserProfileImage();
         if (response.ImageUrl != null)
         {
             ImgUserProfileBtn.Source = response.FullImageUrl;

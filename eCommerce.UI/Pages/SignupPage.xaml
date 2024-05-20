@@ -8,7 +8,7 @@
           RowSpacing="20"
           Margin="20,50,20,40">
         <Image Grid.Row="0"
-               Source="storelogo.png"
+               Source="cart.png"
                Aspect="AspectFit"
                HeightRequest="100"
                WidthRequest="100" />

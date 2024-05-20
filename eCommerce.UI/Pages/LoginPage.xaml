@@ -7,7 +7,7 @@
           RowSpacing="20"
           Margin="20,150,20,40">
         <Image Grid.Row="0"
-               Source="storelogo.png"
+               Source="cart.png"
                Aspect="AspectFit"
                HeightRequest="100"
                WidthRequest="100" />
@@ -31,17 +31,22 @@
                 Text="Giriş Yap"
                 x:Name="BtnSignIn" 
                 Clicked="BtnSignIn_Clicked"/>
+         
+        
         <HorizontalStackLayout Grid.Row="4"
                                Spacing="2"
                                HorizontalOptions="Center"
                                VerticalOptions="EndAndExpand">
             <Label Text="Üye değil misin?" />
             <Label Text="Şimdi Kayıt Ol!">
+            
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapRegister"
                                           Tapped="TapRegister_Tapped"/>
                 </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
+        
     </Grid>
+    
 </ContentPage>

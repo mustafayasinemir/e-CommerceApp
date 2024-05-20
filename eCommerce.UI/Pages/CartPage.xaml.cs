@@ -7,6 +7,7 @@ namespace eCommerce.UI.Pages;
 public partial class CartPage : ContentPage
 {
     private ObservableCollection<ShoppingCartItem> ShoppingCartItems = new ObservableCollection<ShoppingCartItem>();
+    private ApiService apiService = new ApiService();
     public CartPage()
     {
         InitializeComponent();
@@ -29,7 +30,7 @@ public partial class CartPage : ContentPage
     private async void GetShoppingCartItems()
     {
         ShoppingCartItems.Clear();
-        var shoppingcartitems = await ApiService.GetShoppingCartItems(Preferences.Get("userid", 0));
+        var shoppingcartitems = await apiService.GetShoppingCartItems(Preferences.Get("userid", 0));
         foreach (var shoppingCart in shoppingcartitems)
         {
             ShoppingCartItems.Add(shoppingCart);
@@ -52,7 +53,7 @@ public partial class CartPage : ContentPage
     private async void UpdateCartQuantity(int productId, string action)
     {
 
-        var response = await ApiService.UpdateCartQuantity(productId, action);
+        var response = await apiService.UpdateCartQuantity(productId, action);
         if (response)
         {
             return;
@@ -113,7 +114,7 @@ public partial class CartPage : ContentPage
             OrderTotal = Convert.ToInt32(LblTotalPrice.Text)
         };
 
-        var response = await ApiService.PlaceOrder(order);
+        var response = await apiService.PlaceOrder(order);
         if (response)
         {
             await DisplayAlert("", "Sipariþiniz verildi", "Tamam");

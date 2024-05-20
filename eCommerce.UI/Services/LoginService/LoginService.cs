@@ -23,6 +23,7 @@ namespace eCommerce.UI.Services.LoginService
             Preferences.Set("accesstoken", result.AccessToken);
             Preferences.Set("userid", result.UserId);
             Preferences.Set("username", result.UserName);
+            Preferences.Set("role",result.Role);
             return true;
         }
     }

@@ -4,7 +4,7 @@ namespace eCommerce.UI.Pages;
 
 public partial class OrderDetailPage : ContentPage
 {
-    OrderDetailsService orderDetailsService =new OrderDetailsService();
+    ApiService apiService=new ApiService();
     public OrderDetailPage(int orderId, int totalPrice)
     {
         InitializeComponent();
@@ -14,7 +14,7 @@ public partial class OrderDetailPage : ContentPage
 
     private async void GetOrderDetail(int orderId)
     {
-        var orderDetails = await ApiService.GetOrderDetails(orderId);
+        var orderDetails = await apiService.GetOrderDetails(orderId);
         CvOrderDetail.ItemsSource = orderDetails;
     }
 }

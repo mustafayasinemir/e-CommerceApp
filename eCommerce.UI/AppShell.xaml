@@ -30,8 +30,8 @@
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}"/>
         </Tab>
 
-        <Tab Title="Kategori İşlemleri" Icon="profile">
-            <ShellContent ContentTemplate="{DataTemplate adminPages:CategoryAddPage}"/>
+        <Tab  IsVisible="{Binding IsAdmin}"  Title="Admin" Icon="admin">
+            <ShellContent ContentTemplate="{DataTemplate adminPages:AdminHomePage}"/>
         </Tab>
     </TabBar>
 

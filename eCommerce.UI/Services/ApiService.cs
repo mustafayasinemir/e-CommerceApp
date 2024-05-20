@@ -10,13 +10,13 @@ using eCommerce.UI.Models;
 
 namespace eCommerce.UI.Services
 {
-    public static class ApiService
+    public  class ApiService
     {
-        public static async Task<bool> UploadUserImage(byte[] imageArray)
+        public async Task<bool> UploadUserImage(byte[] imageArray)
         {
-
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
             var content = new MultipartFormDataContent();
             content.Add(new ByteArrayContent(imageArray), "Image", "image.jpg");
             var response = await httpClient.PostAsync(AppSettings.ApiUrl + "api/users/uploadphoto", content);
@@ -24,14 +24,14 @@ namespace eCommerce.UI.Services
             return true;
         }
 
-        public static async Task<ProfileImage> GetUserProfileImage()
+        public async Task<ProfileImage> GetUserProfileImage()
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/users/profileimage");
             return JsonConvert.DeserializeObject<ProfileImage>(response);
         }
-        public static async Task<List<Category>> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -39,7 +39,7 @@ namespace eCommerce.UI.Services
             return JsonConvert.DeserializeObject<List<Category>>(response);
         }
 
-        public static async Task<List<Product>> GetProducts(string productType, string categoryId)
+        public  async Task<List<Product>> GetProducts(string productType, string categoryId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -47,7 +47,7 @@ namespace eCommerce.UI.Services
             return JsonConvert.DeserializeObject<List<Product>>(response);
         }
 
-        public static async Task<ProductDetail> GetProductDetail(int productId)
+        public  async Task<ProductDetail> GetProductDetail(int productId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -55,7 +55,7 @@ namespace eCommerce.UI.Services
             return JsonConvert.DeserializeObject<ProductDetail>(response);
         }
 
-        public static async Task<bool> AddItemsInCart(ShoppingCart shoppingCart)
+        public  async Task<bool> AddItemsInCart(ShoppingCart shoppingCart)
         {
 
             var httpClient = new HttpClient();
@@ -67,7 +67,7 @@ namespace eCommerce.UI.Services
             return true;
         }
 
-        public static async Task<List<ShoppingCartItem>> GetShoppingCartItems(int userId)
+        public  async Task<List<ShoppingCartItem>> GetShoppingCartItems(int userId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -75,7 +75,7 @@ namespace eCommerce.UI.Services
             return JsonConvert.DeserializeObject<List<ShoppingCartItem>>(response);
         }
 
-        public static async Task<bool> UpdateCartQuantity(int productId, string action)
+        public  async Task<bool> UpdateCartQuantity(int productId, string action)
         {
 
             var httpClient = new HttpClient();
@@ -86,7 +86,7 @@ namespace eCommerce.UI.Services
             return true;
         }
 
-        public static async Task<bool> PlaceOrder(Order order)
+        public  async Task<bool> PlaceOrder(Order order)
         {
 
             var httpClient = new HttpClient();
@@ -98,7 +98,7 @@ namespace eCommerce.UI.Services
             return true;
         }
 
-        public static async Task<List<OrderByUser>> GetOrdersByUser(int userId)
+        public  async Task<List<OrderByUser>> GetOrdersByUser(int userId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));
@@ -106,7 +106,7 @@ namespace eCommerce.UI.Services
             return JsonConvert.DeserializeObject<List<OrderByUser>>(response);
         }
 
-        public static async Task<List<OrderDetail>> GetOrderDetails(int orderId)
+        public  async Task<List<OrderDetail>> GetOrderDetails(int orderId)
         {
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accesstoken", string.Empty));

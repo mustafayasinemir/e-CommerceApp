@@ -5,6 +5,7 @@ namespace eCommerce.UI.Pages;
 
 public partial class HomePage : ContentPage
 {
+    ApiService apiService=new ApiService();
     public HomePage()
     {
         InitializeComponent();
@@ -16,23 +17,23 @@ public partial class HomePage : ContentPage
 
     private async void GetBestSellingProducts()
     {
-        var products = await ApiService.GetProducts("bestselling", string.Empty);
+        var products = await apiService.GetProducts("bestselling", string.Empty);
         CvBestSelling.ItemsSource = products;
     }
 
     private async void GetTrendingProducts()
     {
-        var products = await ApiService.GetProducts("trending", string.Empty);
+        var products = await apiService.GetProducts("trending", string.Empty);
         CvTrending.ItemsSource = products;
     }
 
     private async void GetCategories()
     {
-        var categories = await ApiService.GetCategories();
+        var categories = await apiService.GetCategories();
         CvCategories.ItemsSource = categories;
     }
 
-    private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Categories_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
         if (currentSelection == null) return;
@@ -40,7 +41,7 @@ public partial class HomePage : ContentPage
         ((CollectionView)sender).SelectedItem = null;
     }
 
-    private void CvBestSelling_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void BestSelling_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as Product;
         if (currentSelection == null) return;
@@ -48,7 +49,7 @@ public partial class HomePage : ContentPage
         ((CollectionView)sender).SelectedItem = null;
     }
 
-    private void CvTrending_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Trending_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var currentSelection = e.CurrentSelection.FirstOrDefault() as Product;
         if (currentSelection == null) return;

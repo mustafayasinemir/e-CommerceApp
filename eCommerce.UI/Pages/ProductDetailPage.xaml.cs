@@ -6,9 +6,11 @@ namespace eCommerce.UI.Pages;
 
 public partial class ProductDetailPage : ContentPage
 {
+    
     private int productId;
     private string imageUrl;
     private FavoriteService favoriteService = new FavoriteService();
+    private ApiService apiService = new ApiService();
     public ProductDetailPage(int productId)
     {
         InitializeComponent();
@@ -18,7 +20,7 @@ public partial class ProductDetailPage : ContentPage
 
     private async void GetProductDetail(int productId)
     {
-        var product = await ApiService.GetProductDetail(productId);
+        var product = await apiService.GetProductDetail(productId);
         LblProductName.Text = product.Name;
         LblProductDescription.Text = product.Detail;
         ImgProduct.Source = product.FullImageUrl;
@@ -60,7 +62,7 @@ public partial class ProductDetailPage : ContentPage
             CustomerId = Preferences.Get("userid", 0)
         };
 
-        var response = await ApiService.AddItemsInCart(shoppingCart);
+        var response = await apiService.AddItemsInCart(shoppingCart);
         if (response)
         {
             await DisplayAlert("", "Ürün sepetinize eklendi", "Tamam");
