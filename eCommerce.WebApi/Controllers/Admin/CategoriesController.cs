@@ -9,20 +9,19 @@ namespace eCommerce.Api.Controllers.Admin
     [ApiController]
     public class CategoriesController(ApiDbContext dbContext) : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("[action]")]
         public IActionResult AddCategory(Category category)
         {
-            if (ModelState.IsValid)
-            {
+            
                 dbContext.Categories.Add(category);
                 dbContext.SaveChanges();
                 return Ok(category);
-            }
+            
 
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("[action]")]
         public IActionResult DeleteCategory(int id)
         {
             var category = dbContext.Categories.Find(id);
@@ -33,14 +32,10 @@ namespace eCommerce.Api.Controllers.Admin
 
             dbContext.Categories.Remove(category);
             dbContext.SaveChanges();
-            return Ok("Kategori silindi !");
+            return Ok("Kategori silindi!");
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult UpdateCategory(int id, Category category)
-        //{
-        //    var category = dbContext.Categories.Find(id);
-        //}
+       
     }
 }
 

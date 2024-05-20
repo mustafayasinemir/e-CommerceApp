@@ -6,21 +6,21 @@ namespace eCommerce.Api.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Detail { get; set; }
-        public string ImageUrl { get; set; }
-        public double Price { get; set; }
-        public bool IsTrending { get; set; }
-        public bool IsBestSelling { get; set; }
-        public int CategoryId { get; set; }
+        public string? Detail { get; set; }
+        public string? ImageUrl { get; set; }
+        public double? Price { get; set; }
+        public bool? IsTrending { get; set; } = false;
+        public bool? IsBestSelling { get; set; } = false;
+        public int? CategoryId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime RemoveDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? RemoveDate { get; set; }= DateTime.MinValue;
+        public DateTime? UpdatedDate { get; set; }=DateTime.MinValue;
 
 
         [JsonIgnore]
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
         [JsonIgnore]
-        public ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public ICollection<ShoppingCartItem>? ShoppingCartItems { get; set; }
 
     }
 }

@@ -1,7 +1,6 @@
 ﻿using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace eCommerce.Api.Controllers;
@@ -61,7 +60,7 @@ public class ShoppingCartItemsController(ApiDbContext dbContext) : ControllerBas
                 ProductId = shoppingCartItem.ProductId,
                 Price = shoppingCartItem.Price,
                 Qty = shoppingCartItem.Qty,
-                TotalAmount = (productRecord.Price) * (shoppingCartItem.Qty)
+                TotalAmount = (int)(productRecord.Price) * (shoppingCartItem.Qty)
             };
             dbContext.ShoppingCartItems.Add(sCart);
         }

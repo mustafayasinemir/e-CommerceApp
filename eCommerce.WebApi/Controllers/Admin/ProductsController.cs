@@ -9,7 +9,7 @@ namespace eCommerce.Api.Controllers.Admin
     [ApiController]
     public class ProductsController(ApiDbContext dbContext) : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("[action]")]
         public IActionResult AddProduct(Product product)
         {
             if (ModelState.IsValid)

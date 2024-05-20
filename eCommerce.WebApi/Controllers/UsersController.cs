@@ -1,12 +1,10 @@
 ﻿using eCommerce.Api.DTOs;
 using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Security.Claims;
 using System.Text;
 
@@ -31,7 +29,7 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
     }
 
     [HttpPost("[action]")]
-    public IActionResult Login([FromBody] User user)
+    public IActionResult Login([FromBody] UserLoginDTO user)
     {
         var currentUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
         if (currentUser == null)
@@ -42,8 +40,8 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim(ClaimTypes.Email , user.Email),
-            new Claim(ClaimTypes.Role,user.Role)
+            new Claim(ClaimTypes.Email , currentUser.Email),
+            new Claim(ClaimTypes.Role,currentUser.Role)
         };
 
         var token = new JwtSecurityToken(
@@ -59,7 +57,8 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
             access_token = jwt,
             token_type = "bearer",
             user_id = currentUser.Id,
-            user_name = currentUser.Name
+            user_name = currentUser.Name,
+            role = currentUser.Role
         });
 
     }
