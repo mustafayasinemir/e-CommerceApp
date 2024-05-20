@@ -15,5 +15,8 @@ namespace eCommerce.UI.Models
 
         [JsonProperty("user_name")]
         public string UserName { get; set; }
+
+        [JsonProperty("role")]
+        public string Role { get; set; }
     }
 }
