@@ -1,6 +1,6 @@
 ﻿namespace eCommerce.Api.DTOs
 {
-    public class UserRegisterRequestDTO
+    public class UserRegisterDto
     {
         public string Name { get; set; }
         public string Email { get; set; }
