@@ -1,13 +1,20 @@
 using System.Collections.ObjectModel;
 using eCommerce.UI.Models;
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.ShoppingCartService;
+using eCommerce.UI.Services.OrderService;
+
 
 namespace eCommerce.UI.Pages;
 
 public partial class CartPage : ContentPage
 {
     private ObservableCollection<ShoppingCartItem> ShoppingCartItems = new ObservableCollection<ShoppingCartItem>();
-    private ApiService apiService = new ApiService();
+
+    private ShoppingCartService shoppingCartServices = new ShoppingCartService();
+
+    private OrderService orderService = new OrderService();
+
+
     public CartPage()
     {
         InitializeComponent();
@@ -30,7 +37,7 @@ public partial class CartPage : ContentPage
     private async void GetShoppingCartItems()
     {
         ShoppingCartItems.Clear();
-        var shoppingcartitems = await apiService.GetShoppingCartItems(Preferences.Get("userid", 0));
+        var shoppingcartitems = await shoppingCartServices.GetShoppingCartItems(Preferences.Get("userid", 0));
         foreach (var shoppingCart in shoppingcartitems)
         {
             ShoppingCartItems.Add(shoppingCart);
@@ -53,7 +60,7 @@ public partial class CartPage : ContentPage
     private async void UpdateCartQuantity(int productId, string action)
     {
 
-        var response = await apiService.UpdateCartQuantity(productId, action);
+        var response = await shoppingCartServices.UpdateCartQuantity(productId, action);
         if (response)
         {
             return;
@@ -114,7 +121,7 @@ public partial class CartPage : ContentPage
             OrderTotal = Convert.ToInt32(LblTotalPrice.Text)
         };
 
-        var response = await apiService.PlaceOrder(order);
+        var response = await orderService.PlaceOrder(order);
         if (response)
         {
             await DisplayAlert("", "Sipariþiniz verildi", "Tamam");

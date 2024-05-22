@@ -32,10 +32,10 @@ namespace eCommerce.UI.Pages.AdminPage
             await Navigation.PushAsync(new AdminProductAdded());
         }
 
-        //private async void OnUpdateProductButtonClicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new AdminProductUpdated());
-        //}
+        private async void OnUpdateProductButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AdminProductUpdate());
+        }
 
         //private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
         //{

@@ -49,9 +49,8 @@
         </CollectionView.ItemTemplate>
         <CollectionView.Footer>
             <HorizontalStackLayout HorizontalOptions="End"
-                                   Spacing="10">
-                <Label Text="Toplam Tutar" />
-                <Label  x:Name="LblTotalPrice" />
+                                   Spacing="20">
+             
             </HorizontalStackLayout>
         </CollectionView.Footer>
     </CollectionView>

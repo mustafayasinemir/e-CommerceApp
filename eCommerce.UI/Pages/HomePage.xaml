@@ -12,6 +12,7 @@
                    FontSize="Large" />
             <Label Text="İhtiyacını hemen bulabilirsin! Her şey elinin altında!"
                    FontSize="Subtitle" />
+            <SearchBar Placeholder="Sana Ne Lazım ?"></SearchBar>
         </VerticalStackLayout>
         <Label Text="Kategoriler"
                Grid.Row="1"
@@ -24,7 +25,9 @@
                 <LinearItemsLayout ItemSpacing="30"
                                    Orientation="Horizontal" />
             </CollectionView.ItemsLayout>
+
             <CollectionView.ItemTemplate>
+
                 <DataTemplate>
                     <VerticalStackLayout>
                         <Border  StrokeShape="RoundRectangle 10">
@@ -39,7 +42,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        
         <CollectionView x:Name="CvBestSelling"
                         Grid.Row="3"
                         SelectionMode="Single"
@@ -60,7 +63,7 @@
                             <Label TextColor="White"
                                    FontSize="18"
                                    BackgroundColor="#80000000"
-                                   Padding="10,5"
+                                   Padding="9,1"
                                    VerticalOptions="End"
                                    HorizontalOptions="FillAndExpand"
                                    Text="{Binding Name}"/>
@@ -87,17 +90,17 @@
                 <DataTemplate>
 
                     <Border VerticalOptions="Start"
-                            StrokeShape="RoundRectangle 10,10,10,10"
+                            StrokeShape="RoundRectangle 5,5,5,5"
                             Padding="10">
                         <Grid RowSpacing="5"
                               RowDefinitions="Auto,Auto,Auto">
 
                             <Border VerticalOptions="Start"
-                                    StrokeShape="RoundRectangle 10,10,10,10">
+                                    StrokeShape="RoundRectangle 8,8,8,8">
                             
                                 <Image Aspect="AspectFill"
-                                       HeightRequest="140"
-                                       WidthRequest="140"
+                                       HeightRequest="80"
+                                       WidthRequest="80"
                                        Source="{Binding FullImageUrl}" />
                             </Border>
 

@@ -40,8 +40,9 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <FormattedString.Spans>
-                                        <Span Text="$" />
                                         <Span Text="{Binding OrderTotal}"/>
+                                        <Span Text="TL" />
+                                        
                                     </FormattedString.Spans>
                                 </FormattedString>
                             </Label.FormattedText>

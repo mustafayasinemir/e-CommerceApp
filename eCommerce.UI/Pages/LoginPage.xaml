@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eCommerce.UI.Pages.LoginPage"
              NavigationPage.HasNavigationBar="False">
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
           RowSpacing="20"
           Margin="20,150,20,40">
         <Image Grid.Row="0"
@@ -31,22 +31,31 @@
                 Text="Giriş Yap"
                 x:Name="BtnSignIn" 
                 Clicked="BtnSignIn_Clicked"/>
-         
-        
-        <HorizontalStackLayout Grid.Row="4"
-                               Spacing="2"
-                               HorizontalOptions="Center"
-                               VerticalOptions="EndAndExpand">
-            <Label Text="Üye değil misin?" />
+
+        <StackLayout Grid.Row="4"
+                     Orientation="Horizontal"
+                     Spacing="2"
+                     HorizontalOptions="Center"
+                     VerticalOptions="EndAndExpand">
+            <Label Text="Üye değil misin? " />
             <Label Text="Şimdi Kayıt Ol!">
-            
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapRegister"
                                           Tapped="TapRegister_Tapped"/>
                 </Label.GestureRecognizers>
             </Label>
-        </HorizontalStackLayout>
-        
+        </StackLayout>
+
+        <Label Grid.Row="5"
+               Text="Şifreni mi unuttun?"
+               HorizontalOptions="Center"
+               VerticalOptions="EndAndExpand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+            </Label.GestureRecognizers>
+            
+        </Label>
+
     </Grid>
-    
+
 </ContentPage>

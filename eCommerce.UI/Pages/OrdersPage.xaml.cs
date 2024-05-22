@@ -1,11 +1,11 @@
 using eCommerce.UI.Models;
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.OrderService;
 
 namespace eCommerce.UI.Pages;
 
 public partial class OrdersPage : ContentPage
 {
-    private ApiService apiService = new ApiService();
+    private OrderService orderService = new OrderService();
     public OrdersPage()
     {
         InitializeComponent();
@@ -14,7 +14,7 @@ public partial class OrdersPage : ContentPage
 
     private async void GetOrdersList()
     {
-        var orders = await apiService.GetOrdersByUser(Preferences.Get("userid", 0));
+        var orders = await orderService.GetOrdersByUser(Preferences.Get("userid", 0));
         CvOrders.ItemsSource = orders;
     }
 

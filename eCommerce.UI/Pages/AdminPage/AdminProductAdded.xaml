@@ -20,10 +20,10 @@
         <Label Text="Fiyat Giriniz" />
         <Entry x:Name="ProductPriceEntry" Placeholder="Ürün fiyatını giriniz" Keyboard="Numeric" />
 
-        <Label Text="En Çok Satan (true/false)" />
+        <Label Text="Çok Satılan Ürün Mü ?" />
         <Switch x:Name="BestSellingSwitch" />
 
-        <Label Text="Trend (true/false)" />
+        <Label Text="Trend mi ?" />
         <Switch x:Name="TrendSwitch" />
 
         <Label Text="Oluşturma Tarihi" />

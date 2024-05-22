@@ -1,11 +1,14 @@
 using eCommerce.UI.Models;
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.ProductService;
+using eCommerce.UI.Services.CategoryService;
+
 
 namespace eCommerce.UI.Pages;
 
 public partial class HomePage : ContentPage
 {
-    ApiService apiService=new ApiService();
+    ProductService productService =new ProductService();
+    CategoryService categoryService =new CategoryService();
     public HomePage()
     {
         InitializeComponent();
@@ -17,19 +20,19 @@ public partial class HomePage : ContentPage
 
     private async void GetBestSellingProducts()
     {
-        var products = await apiService.GetProducts("bestselling", string.Empty);
+        var products = await productService.GetProducts("bestselling", string.Empty);
         CvBestSelling.ItemsSource = products;
     }
 
     private async void GetTrendingProducts()
     {
-        var products = await apiService.GetProducts("trending", string.Empty);
+        var products = await productService.GetProducts("trending", string.Empty);
         CvTrending.ItemsSource = products;
     }
 
     private async void GetCategories()
     {
-        var categories = await apiService.GetCategories();
+        var categories = await categoryService.GetCategories();
         CvCategories.ItemsSource = categories;
     }
 

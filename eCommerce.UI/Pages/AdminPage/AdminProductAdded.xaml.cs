@@ -72,8 +72,8 @@ namespace eCommerce.UI.Pages.AdminPage
                 IsTrending = TrendSwitch.IsToggled,
                 CategoryId = selectedCategory.Id,
                 CreatedDate = CreationDatePicker.Date,
-                UpdatedDate = DateTime.Now,
-                RemoveDate = DateTime.MinValue
+                
+                
             };
 
             await AddProductAsync(product);

@@ -1,20 +1,19 @@
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.OrderService;
 
 namespace eCommerce.UI.Pages;
 
 public partial class OrderDetailPage : ContentPage
 {
-    ApiService apiService=new ApiService();
+    OrderService orderService =new OrderService();
     public OrderDetailPage(int orderId, int totalPrice)
     {
         InitializeComponent();
-        LblTotalPrice.Text = totalPrice + " ?";
         GetOrderDetail(orderId);
     }
 
     private async void GetOrderDetail(int orderId)
     {
-        var orderDetails = await apiService.GetOrderDetails(orderId);
+        var orderDetails = await orderService.GetOrderDetails(orderId);
         CvOrderDetail.ItemsSource = orderDetails;
     }
 }

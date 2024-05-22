@@ -88,7 +88,8 @@
                 FontSize="Medium"
                 CornerRadius="10"
                 HeightRequest="50"
-                Padding="5"/>
+                Padding="5"
+                Clicked="OnUpdateProductButtonClicked"/>
             <Button 
                 Text="Ürün Silme İşlemleri"
                 Grid.Row="5"

@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+ï»¿using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -14,7 +14,7 @@ namespace eCommerce.UI.Pages.AdminPage
 
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri(AppSettings.ApiUrl) 
+                BaseAddress = new Uri(AppSettings.ApiUrl)
             };
 
             //_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -25,17 +25,17 @@ namespace eCommerce.UI.Pages.AdminPage
             string categoryName = CategoryNameEntry.Text;
             string categoryDescription = CategoryDescriptionEditor.Text;
 
-            
+
             if (string.IsNullOrEmpty(categoryName) || string.IsNullOrEmpty(categoryDescription))
             {
-                await DisplayAlert("Hata", "Tüm alanlarý doldurunuz ! ", "Tamam");
+                await DisplayAlert("Hata", "TÃ¼m alanlarÄ± doldurunuz ! ", "Tamam");
                 return;
             }
 
             var category = new
             {
                 Name = categoryName,
-                Description = categoryDescription
+                ImageUrl = categoryDescription
             };
 
             var json = JsonConvert.SerializeObject(category);
@@ -46,21 +46,21 @@ namespace eCommerce.UI.Pages.AdminPage
 
             try
             {
-                var response = await _httpClient.PostAsync("api/admin/Categories/AddCategory", content); 
+                var response = await _httpClient.PostAsync("api/admin/Categories/AddCategory", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await DisplayAlert("Tamamlandý", "Kategori baþarý ile eklendi.", "Tamam");
+                    await DisplayAlert("Tamamlandï¿½", "Kategori baÅŸarÄ± ile eklendi.", "Tamam");
 
                 }
                 else
                 {
-                    await DisplayAlert("Hata", "Kategori eklenirken bir hata oluþtu. Lütfen tekrar deneyin.", "Tamam");
+                    await DisplayAlert("Hata", "Kategori eklenirken bir hata oluï¿½tu. Lï¿½tfen tekrar deneyin.", "Tamam");
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Hata", "Hata oluþtu", "Tamam");
+                await DisplayAlert("Hata", "Hata oluÅŸtu", "Tamam");
             }
         }
     }

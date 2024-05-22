@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eCommerce.UI.Pages.AdminPage.AdminCategoryRemove">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="15" >
             <Label 
                 Text="Kategorileri Sil"
                 FontSize="Large"
                 HorizontalOptions="Center" />
-
+           
             <ListView x:Name="CategoryListView">
                 <ListView.ItemTemplate>
+                  
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
+                        <TextCell Text="{Binding Name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

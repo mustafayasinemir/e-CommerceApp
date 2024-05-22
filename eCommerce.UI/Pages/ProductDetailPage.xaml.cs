@@ -1,6 +1,9 @@
 using eCommerce.UI.Models;
-using eCommerce.UI.Services;
+using eCommerce.UI.Services.ProductService;
 using eCommerce.UI.Services.FavoriteService;
+using eCommerce.UI.Services.ShoppingCartService;
+
+
 
 namespace eCommerce.UI.Pages;
 
@@ -10,7 +13,9 @@ public partial class ProductDetailPage : ContentPage
     private int productId;
     private string imageUrl;
     private FavoriteService favoriteService = new FavoriteService();
-    private ApiService apiService = new ApiService();
+    private ProductService productService = new ProductService();
+    private ShoppingCartService cartService = new ShoppingCartService();
+
     public ProductDetailPage(int productId)
     {
         InitializeComponent();
@@ -20,7 +25,7 @@ public partial class ProductDetailPage : ContentPage
 
     private async void GetProductDetail(int productId)
     {
-        var product = await apiService.GetProductDetail(productId);
+        var product = await productService.GetProductDetail(productId);
         LblProductName.Text = product.Name;
         LblProductDescription.Text = product.Detail;
         ImgProduct.Source = product.FullImageUrl;
@@ -62,7 +67,7 @@ public partial class ProductDetailPage : ContentPage
             CustomerId = Preferences.Get("userid", 0)
         };
 
-        var response = await apiService.AddItemsInCart(shoppingCart);
+        var response = await cartService.AddItemsInCart(shoppingCart);
         if (response)
         {
             await DisplayAlert("", "Ürün sepetinize eklendi", "Tamam");
