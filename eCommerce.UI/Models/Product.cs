@@ -17,7 +17,7 @@ namespace eCommerce.UI.Models
         public string ImageUrl { get; set; }
 
         [JsonProperty("price")]
-        public int Price { get; set; }
+        public double Price { get; set; }
 
         [JsonProperty("isTrend")]  
         public bool? IsTrending { get; set; }
