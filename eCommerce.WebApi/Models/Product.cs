@@ -12,9 +12,9 @@ namespace eCommerce.Api.Models
         public bool? IsTrending { get; set; } = false;
         public bool? IsBestSelling { get; set; } = false;
         public int? CategoryId { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? RemoveDate { get; set; }= DateTime.MinValue;
-        public DateTime? UpdatedDate { get; set; }=DateTime.MinValue;
+        public DateTime CreatedDate { get; set; }= DateTime.Now;
+        public DateTime? RemoveDate { get; set; }= DateTime.Now;
+        public DateTime? UpdatedDate { get; set; }=DateTime.Now;
 
 
         [JsonIgnore]
