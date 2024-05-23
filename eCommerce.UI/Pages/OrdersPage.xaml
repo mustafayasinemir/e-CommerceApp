@@ -22,13 +22,13 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Text="Sipariş Numarası" />
+                               Text="S-Numarası" />
                         <Label Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Id}"/>
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="Placed on" />
+                               Text="S-Zamanı:" />
                         <Label Grid.Row="1"
                                Grid.Column="1"
                                Text="{Binding OrderPlaced}"/>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.PaymentPage"
+             Title="Ödeme Sayfası">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <!-- Kart Görüntüsü -->
+        <Frame Padding="15" CornerRadius="10" BackgroundColor="LightGray" Margin="0,0,0,20">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Kart Numarası:" FontAttributes="Bold" />
+                <Label x:Name="CardNumberLabel" FontSize="18" TextColor="Black" />
+
+                <HorizontalStackLayout Spacing="20">
+                    <VerticalStackLayout>
+                        <Label Text="Son Tarih:" FontAttributes="Bold" />
+                        <Label x:Name="ExpiryDateLabel" FontSize="18" TextColor="Black" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="CVV:" FontAttributes="Bold" />
+                        <Label x:Name="CVVLabel" FontSize="18" TextColor="Black" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Kart Bilgileri Girişi -->
+        <Entry x:Name="CardNumberEntry" Placeholder="Kart Numaranız" Keyboard="Numeric" MaxLength="12" TextChanged="OnCardNumberChanged" />
+        <Entry x:Name="ExpiryDateEntry" Placeholder="MM/YY" Keyboard="Numeric" TextChanged="OnExpiryDateChanged" />
+        <Entry x:Name="CVVEntry" Placeholder="CVV" Keyboard="Numeric" MaxLength="4" TextChanged="OnCVVChanged" />
+
+        <!-- Ödeme Yap Butonu -->
+        <Button Text="Ödeme Yap" Clicked="OnPayButtonClicked" BackgroundColor="#18565f" TextColor="White" CornerRadius="10" />
+    </VerticalStackLayout>
+</ContentPage>

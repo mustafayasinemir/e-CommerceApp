@@ -50,7 +50,8 @@ namespace eCommerce.UI.Pages.AdminPage
 
                 if (response.IsSuccessStatusCode)
                 {
-                    await DisplayAlert("Tamamland�", "Kategori başarı ile eklendi.", "Tamam");
+                    await DisplayAlert("Tamamlandı", "Kategori başarı ile eklendi.", "Tamam");
+
 
                 }
                 else

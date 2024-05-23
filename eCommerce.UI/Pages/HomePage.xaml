@@ -12,7 +12,7 @@
                    FontSize="Large" />
             <Label Text="İhtiyacını hemen bulabilirsin! Her şey elinin altında!"
                    FontSize="Subtitle" />
-            <SearchBar Placeholder="Sana Ne Lazım ?"></SearchBar>
+            <SearchBar x:Name="ProductSearchBar" Placeholder="Sana Ne Lazım ?" SearchButtonPressed="OnSearchButtonPressed"/>
         </VerticalStackLayout>
         <Label Text="Kategoriler"
                Grid.Row="1"
@@ -42,7 +42,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
+
         <CollectionView x:Name="CvBestSelling"
                         Grid.Row="3"
                         SelectionMode="Single"
@@ -97,21 +97,21 @@
 
                             <Border VerticalOptions="Start"
                                     StrokeShape="RoundRectangle 8,8,8,8">
-                            
+
                                 <Image Aspect="AspectFill"
                                        HeightRequest="80"
                                        WidthRequest="80"
                                        Source="{Binding FullImageUrl}" />
                             </Border>
 
-                         
+
                             <Label Grid.Row="1"
                                    FontAttributes="Bold"
                                    LineBreakMode="WordWrap"
                                    MaxLines="2"
                                    Text="{Binding Name}" />
 
-                           
+
                             <Label Grid.Row="2"
                                    Text="{Binding Price,StringFormat='{0:C}'}" />
                         </Grid>

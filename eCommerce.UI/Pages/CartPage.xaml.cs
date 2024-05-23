@@ -114,6 +114,7 @@ public partial class CartPage : ContentPage
 
     private async void TapPlaceOrder_Tapped(object sender, TappedEventArgs e)
     {
+        Navigation.PushAsync(new PaymentPage());
         var order = new Order()
         {
             Address = LblAddress.Text,
@@ -122,9 +123,12 @@ public partial class CartPage : ContentPage
         };
 
         var response = await orderService.PlaceOrder(order);
+       
         if (response)
         {
+            
             await DisplayAlert("", "Sipariþiniz verildi", "Tamam");
+            Navigation.PushAsync(new OrdersPage());
             ShoppingCartItems.Clear();
         }
         else

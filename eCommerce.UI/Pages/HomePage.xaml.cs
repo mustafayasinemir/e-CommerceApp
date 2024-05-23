@@ -1,21 +1,50 @@
 using eCommerce.UI.Models;
+
 using eCommerce.UI.Services.ProductService;
 using eCommerce.UI.Services.CategoryService;
-
+using System.Collections.ObjectModel;
 
 namespace eCommerce.UI.Pages;
 
 public partial class HomePage : ContentPage
 {
     ProductService productService =new ProductService();
+    public ObservableCollection<Product> Products { get; set; }
+
     CategoryService categoryService =new CategoryService();
     public HomePage()
     {
+       
         InitializeComponent();
+        productService = new ProductService();
+        Products = new ObservableCollection<Product>();
+        CvBestSelling.ItemsSource = Products;
         LblUserName.Text = "Merhaba! " + Preferences.Get("username", string.Empty);
         GetCategories();
         GetTrendingProducts();
         GetBestSellingProducts();
+     
+    }
+    private async void OnSearchButtonPressed(object sender, EventArgs e)
+    {
+        var query = ProductSearchBar.Text;
+        await SearchProducts(query);
+    }
+
+    private async Task SearchProducts(string query)
+    {
+        var result = await productService.GetProducts(query, string.Empty);
+        if (result is null)
+        {
+            DisplayAlert("Üzgünüz !","Aradýðýnýz ürün mevcut deðil!", "Tamam");
+
+        }
+        Products.Clear();
+
+        foreach (var product in result)
+        {
+            Products.Add(product);
+        }
     }
 
     private async void GetBestSellingProducts()
