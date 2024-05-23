@@ -1,37 +1,21 @@
-using Microsoft.Maui.Controls;
+using eCommerce.UI.Models;
+using eCommerce.UI.Services.ProductService;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using eCommerce.UI.Models;
 
 namespace eCommerce.UI.Pages.AdminPage
 {
-    public partial class AdminProductUpdate : ContentPage, INotifyPropertyChanged
+    public partial class AdminProductUpdated : ContentPage
     {
-        private ObservableCollection<Product> products;
-        public ObservableCollection<Product> Products
-        {
-            get { return products; }
-            set { SetProperty(ref products, value); }
-        }
+        private readonly ProductService _productService;
+        public ObservableCollection<Product> Products { get; set; }
 
-        private Product selectedProduct;
-        public Product SelectedProduct
+        public AdminProductUpdated()
         {
-            get { return selectedProduct; }
-            set { SetProperty(ref selectedProduct, value); }
-        }
+            _productService = new ProductService();
+            Products = new ObservableCollection<Product>();
 
-        public AdminProductUpdate()
-        {
             InitializeComponent();
-            BindingContext = this;
-
-            // Load products initially
             LoadProducts();
         }
 
@@ -39,89 +23,70 @@ namespace eCommerce.UI.Pages.AdminPage
         {
             try
             {
-                HttpClient client = new HttpClient();
-                var response = await client.GetStringAsync("https://api.example.com/api/admin/products");
-
-                if (response != null)
+                var products = await _productService.GetProductsAdmin();
+                Products.Clear();
+                foreach (var product in products)
                 {
-                    Products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(response);
+                    Products.Add(product);
                 }
+                ProductListView.ItemsSource = Products;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                await DisplayAlert("Hata", "Ürünler Yüklenemedi!", "Tamam");
             }
         }
 
-        private async void OnUpdateProductButtonClicked(object sender, EventArgs e)
+        private async void OnUpdateProductClicked(object sender, EventArgs e)
         {
-            if (SelectedProduct == null)
+            if (int.TryParse(ProductIdEntry.Text, out int productId))
             {
-                await DisplayAlert("Hata", "Lütfen güncellenecek bir ürün seçin.", "Tamam");
-                return;
-            }
+                var product = new Product
+                {
+                    Name = ProductNameEntry.Text,
+                    Detail = ProductDescriptionEntry.Text,
+                    Price = Convert.ToDouble(ProductPriceEntry.Text),
+                    ImageUrl = ProductImageURLEntry.Text,
+                    IsTrending = TrendSwitch.IsToggled,
+                    IsBestSelling = BestSellingSwitch.IsToggled
+                };
 
-            // Update the product
-            bool success = await UpdateProductAsync(SelectedProduct);
-
-            if (success)
-            {
-                await DisplayAlert("Baþarýlý", "Ürün baþarýyla güncellendi.", "Tamam");
-
-                // Refresh product list
-                LoadProducts();
+                try
+                {
+                    var result = await _productService.UpdateProductAsync(productId, product);
+                    if (result)
+                    {
+                        await DisplayAlert("Baþarýlý", "Ürün Baþarý ile Güncellendi!", "Tamam");
+                        LoadProducts();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Hata", "Ürün Güncellenemedi!", "Tamam");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Hata", "Ürün Güncellenemedi!", "Tamam");
+                }
             }
             else
             {
-                await DisplayAlert("Hata", "Ürün güncellenirken bir hata oluþtu.", "Tamam");
+                await DisplayAlert("Hata", "Ürün ID Bulunamadý!", "Tamam");
             }
         }
 
-        private async Task<bool> UpdateProductAsync(Product product)
+        private void OnProductSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            try
+            if (e.SelectedItem is Product selectedProduct)
             {
-                HttpClient client = new HttpClient();
-                var json = JsonConvert.SerializeObject(product);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PutAsync($"https://api.example.com/api/admin/products/{product.Id}", content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return false;
+                ProductIdEntry.Text = selectedProduct.Id.ToString();
+                ProductNameEntry.Text = selectedProduct.Name;
+                ProductDescriptionEntry.Text = selectedProduct.Detail;
+                ProductPriceEntry.Text = selectedProduct.Price.ToString();
+                ProductImageURLEntry.Text = selectedProduct.ImageUrl;
+                TrendSwitch.IsToggled = selectedProduct.IsTrending ?? false;
+                BestSellingSwitch.IsToggled = selectedProduct.IsBestSelling ?? true;
             }
         }
-
-        #region INotifyPropertyChanged implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (Equals(storage, value))
-            {
-                return false;
-            }
-
-            storage = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-        #endregion
     }
 }

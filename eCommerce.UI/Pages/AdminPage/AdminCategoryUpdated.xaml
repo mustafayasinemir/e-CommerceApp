@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.UI.Pages.AdminPage.AdminCategoryUpdated">
+    <StackLayout Padding="10">
+
+        <Label Text="Mevcut Kategoriler" FontSize="Large" Margin="0,20,0,10" />
+        <ListView x:Name="CategoryListView" ItemSelected="OnCategorySelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Id}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Text="Kategori ID" />
+        <Entry x:Name="CategoryIdEntry" Keyboard="Numeric" Placeholder="Kategori ID" />
+
+        <Label Text="Kategori Adı" />
+        <Entry x:Name="CategoryNameEntry" Placeholder="Kategori İsmini Güncelleyiniz" />
+
+        <Label Text="Kategori Image URL" />
+        <Entry x:Name="CategoryImageUrlEntry" Placeholder="Kategori Image URL Güncelleyiniz" />
+
+        <Button Text="Kategori Güncelle" Clicked="OnUpdateCategoryClicked" BackgroundColor="#18565f"/>
+
+    </StackLayout>
+</ContentPage>

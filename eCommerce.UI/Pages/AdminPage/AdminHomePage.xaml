@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         
         <Label Text="Burası admin sayfasıdır. Dikkatli olunuz, yaptığınız işlemlerden geri dönemeyebiliriz."
-               FontSize="18"
+               FontSize="20"
                FontAttributes="Bold"
                TextColor="#D32F2F"
                BackgroundColor="#FFEBEE"
@@ -57,7 +57,8 @@
                 FontSize="Medium"
                 CornerRadius="10"
                 HeightRequest="50"
-                Padding="5"/>
+                Padding="5"
+                Clicked="OnUpdateCategoryButtonClicked"/>
             <Button 
                 Text="Kategori Silme İşlemleri"
                 Grid.Row="2"
@@ -98,7 +99,8 @@
                 FontSize="Medium"
                 CornerRadius="10"
                 HeightRequest="50"
-                Padding="5"/>
+                Padding="5"
+                Clicked="OnDeleteProductButtonClicked"/>
 
         </Grid>
 

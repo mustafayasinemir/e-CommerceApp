@@ -15,10 +15,10 @@ namespace eCommerce.UI.Pages.AdminPage
             await Navigation.PushAsync(new AdminCategoryAdded());
         }
 
-        //private async void OnUpdateCategoryButtonClicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new AdminCategoryUpdated());
-        //}
+        private async void OnUpdateCategoryButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AdminCategoryUpdated());
+        }
 
         private async void OnRemoveCategoryClicked(object sender, EventArgs e)
         {
@@ -34,12 +34,12 @@ namespace eCommerce.UI.Pages.AdminPage
 
         private async void OnUpdateProductButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AdminProductUpdate());
+            await Navigation.PushAsync(new AdminProductUpdated());
         }
 
-        //private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new AdminProductDeleted());
-        //}
+        private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AdminProductRemove());
+        }
     }
 }

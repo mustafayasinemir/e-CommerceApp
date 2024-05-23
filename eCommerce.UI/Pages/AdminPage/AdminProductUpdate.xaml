@@ -1,40 +1,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="eCommerce.UI.Pages.AdminPage.AdminProductUpdate">
-
+             x:Class="eCommerce.UI.Pages.AdminPage.AdminProductUpdated">
     <StackLayout Padding="10">
-
-        <SearchBar x:Name="ProductSearchBar"
-                   Placeholder="Ürün Ara..."
-                   Text="{Binding SearchText}"
-                   SearchCommand="{Binding SearchCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference ProductSearchBar}}" HeightRequest="50"/>
-
-        
-
-        <Label Text="Ürün İsmi:" Margin="5"/>
-        <Entry x:Name="NameEntry" Placeholder="Ürün İsmini Güncelleyiniz" Text="{Binding SelectedProduct.Name}"  />
-
-        <Label Text="Ürün Detayı:" />
-        <Editor x:Name="DetailEditor" Placeholder="Ürün Detayını Güncelleyiniz" Text="{Binding SelectedProduct.Detail}" />
-
-        <Label Text="Image URL:" />
-        <Entry x:Name="ImageUrlEntry" Placeholder="Ürün Resim URL" Text="{Binding SelectedProduct.ImageUrl}" />
-
-        <Label Text="Fiyat:" />
-        <Entry x:Name="PriceEntry" Placeholder="Ürün Fiyatını Giriniz" Keyboard="Numeric" Text="{Binding SelectedProduct.Price, StringFormat='{0:F2}'}" />
-
-        <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="IsTrendingCheckBox" IsChecked="{Binding SelectedProduct.IsTrending}" />
-            <Label Text="Trend mi?" VerticalOptions="Center" />
-        </StackLayout>
-
-        <StackLayout Orientation="Horizontal">
-            <CheckBox x:Name="IsBestSellingCheckBox" IsChecked="{Binding SelectedProduct.IsBestSelling}" />
-            <Label Text="Çok Satılan Ürün Mü?" VerticalOptions="Center" />
-        </StackLayout>
-
-        <Button Text="Ürün Güncelle" Clicked="OnUpdateProductButtonClicked" BackgroundColor="#18565f" Margin="5"/>
-
+        <Label Text="Mevcut Ürünler" FontSize="Large" Margin="0,20,10,10" />
+        <ListView x:Name="ProductListView" ItemSelected="OnProductSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Id}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Text="Ürün ID" />
+        <Entry x:Name="ProductIdEntry" Keyboard="Numeric" Placeholder="Ürün ID" />
+        <Label Text="Ürün Adı" />
+        <Entry x:Name="ProductNameEntry" Placeholder="Ürün Adını Güncelleyiniz" />
+        <Label Text="Ürün Açıklaması" />
+        <Entry x:Name="ProductDescriptionEntry" Placeholder="Ürün Açıklamasını Güncelleyiniz" />
+        <Label Text="Ürün Image URL" />
+        <Entry x:Name="ProductImageURLEntry" Placeholder="Ürün Resmini Güncelleyiniz" />
+        <Label Text="Ürün Fiyatı" />
+        <Entry x:Name="ProductPriceEntry" Placeholder="Ürün Fiyatını Güncelleyiniz" Keyboard="Numeric" />
+        <Label Text="Çok Satılan Ürün Mü ?" />
+        <Switch x:Name="BestSellingSwitch" />
+        <Label Text="Trend mi ?" />
+        <Switch x:Name="TrendSwitch" />
+        <Button Text="Ürün Güncelle" Clicked="OnUpdateProductClicked" BackgroundColor="#18565f"/>
     </StackLayout>
 </ContentPage>
