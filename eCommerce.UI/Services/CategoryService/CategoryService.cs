@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace eCommerce.UI.Services.CategoryService
 {
-    public class CategoryService : ApiService
+    public class CategoryService : ApiService, ICategoryService
     {
         public async Task<List<Category>> GetCategories()
         {
