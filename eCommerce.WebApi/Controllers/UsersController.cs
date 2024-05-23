@@ -1,5 +1,4 @@
-﻿using eCommerce.Api.DTOs;
-using eCommerce.Api.Models;
+﻿using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +14,7 @@ namespace eCommerce.Api.Controllers;
 public class UsersController(ApiDbContext dbContext, IConfiguration config) : ControllerBase
 {
     [HttpPost("[action]")]
-    public IActionResult Register([FromBody] User user)
+    public IActionResult Register([FromBody]User user)
     {
         var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
         if (userExists != null)
@@ -29,7 +28,7 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
     }
 
     [HttpPost("[action]")]
-    public IActionResult Login([FromBody] UserLoginDTO user)
+    public IActionResult Login([FromBody]User user)
     {
         var currentUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
         if (currentUser == null)
@@ -90,7 +89,7 @@ public class UsersController(ApiDbContext dbContext, IConfiguration config) : Co
                 image.CopyTo(stream);
             }
 
-            // Update the user's ImageUrl property with the URL of the uploaded image
+          
             user.ImageUrl = "/userimages/" + uniqueFileName; 
 
                 

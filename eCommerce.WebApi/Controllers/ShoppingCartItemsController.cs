@@ -40,7 +40,7 @@ public class ShoppingCartItemsController(ApiDbContext dbContext) : ControllerBas
 
     // POST: api/ShoppingCartItems
     [HttpPost]
-    public IActionResult Post([FromBody] ShoppingCartItem shoppingCartItem)
+    public IActionResult Post([FromBody]ShoppingCartItem shoppingCartItem)
     {
         var shoppingCart = dbContext.ShoppingCartItems.FirstOrDefault(s => s.ProductId == shoppingCartItem.ProductId && s.CustomerId == shoppingCartItem.CustomerId);
         if (shoppingCart != null)
@@ -50,7 +50,7 @@ public class ShoppingCartItemsController(ApiDbContext dbContext) : ControllerBas
         }
         else
         {
-            // Getting Product Price
+            
             var productRecord = dbContext.Products.Find(shoppingCartItem.ProductId);
 
 
@@ -97,14 +97,14 @@ public class ShoppingCartItemsController(ApiDbContext dbContext) : ControllerBas
             }
             else if (action.ToLower() == "delete")
             {
-                // Remove the item from the cart.
+                
                 dbContext.ShoppingCartItems.Remove(shoppingCart);
                 dbContext.SaveChanges();
                 return Ok();
             }
             else
             {
-                // Return a response indicating an invalid action.
+               
                 return BadRequest("Geçersiz Eylemde Bulundunuz ! ");
             }
 
@@ -114,7 +114,7 @@ public class ShoppingCartItemsController(ApiDbContext dbContext) : ControllerBas
         }
         else
         {
-            // Return a response indicating that the item was not found in the cart.
+            
             return NotFound();
         }
     }

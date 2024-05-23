@@ -10,7 +10,6 @@ namespace eCommerce.Api.Controllers;
 [ApiController]
 public class OrdersController(ApiDbContext dbContext) : ControllerBase
 {
-    // GET: api/Orders/OrderDetails/5
     [HttpGet("[action]/{orderId}")]
     public IActionResult OrderDetails(int orderId)
     {
@@ -33,7 +32,6 @@ public class OrdersController(ApiDbContext dbContext) : ControllerBase
     }
 
 
-    // GET: api/Orders/OrdersByUser/5
     [HttpGet("[action]/{userId}")]
     public IActionResult OrdersByUser(int userId)
     {
@@ -50,9 +48,9 @@ public class OrdersController(ApiDbContext dbContext) : ControllerBase
         return Ok(orders);
     }
 
-    // POST: api/Orders
     [HttpPost]
-    public IActionResult Post([FromBody] Order order)
+    //FromBody-->Model Binding
+    public IActionResult Post(Order order)
     {
         order.OrderPlaced = DateTime.Now;
         dbContext.Orders.Add(order);

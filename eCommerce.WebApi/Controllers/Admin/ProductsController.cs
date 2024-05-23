@@ -1,4 +1,5 @@
-﻿using eCommerce.Api.Models;
+﻿using eCommerce.Api.DTOs;
+using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,23 +8,83 @@ namespace eCommerce.Api.Controllers.Admin
     [Route("api/admin/[controller]")]
     [Authorize(Roles = "admin")]
     [ApiController]
-    public class ProductsController(ApiDbContext dbContext) : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        [HttpPost("[action]")]
-        public IActionResult AddProduct(Product product)
+        private readonly ApiDbContext dbContext;
+
+        public ProductsController(ApiDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+            var products = dbContext.Products.Select(p => new
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                ImageUrl = p.ImageUrl,
+                IsTrending = p.IsTrending,
+                IsBestSelling = p.IsBestSelling
+            }).ToList();
+
+            return Ok(products);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProduct(int id)
+        {
+            var product = dbContext.Products
+                .Where(p => p.Id == id)
+                .Select(p => new
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Detail = p.Detail,
+                    ImageUrl = p.ImageUrl,
+                    IsTrending = p.IsTrending,
+                    IsBestSelling = p.IsBestSelling
+                })
+                .FirstOrDefault();
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct(ProductAddedDto productDTO)
         {
             if (ModelState.IsValid)
             {
-                product.CreatedDate = DateTime.UtcNow;
+                var product = new Product
+                {
+                    Name = productDTO.Name,
+                    Detail = productDTO.Detail,
+                    ImageUrl = productDTO.ImageUrl,
+                    Price = productDTO.Price,
+                    IsTrending = productDTO.IsTrending,
+                    IsBestSelling = productDTO.IsBestSelling,
+                    CategoryId = productDTO.CategoryId,
+                    CreatedDate = DateTime.UtcNow // Set the current UTC time for CreatedDate
+                };
+
                 dbContext.Products.Add(product);
                 dbContext.SaveChanges();
                 return Ok(product);
             }
+
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
+        [HttpDelete("DeleteProduct")]
+        public IActionResult DeleteProduct(ProductRemoveDto id)
         {
             var product = dbContext.Products.Find(id);
             if (product == null)
@@ -33,7 +94,7 @@ namespace eCommerce.Api.Controllers.Admin
 
             dbContext.Products.Remove(product);
             dbContext.SaveChanges();
-            return Ok("Başarı ile silindi ! ");
+            return Ok("Ürün başarıyla silindi!");
         }
 
         [HttpPut("{id}")]
@@ -60,7 +121,7 @@ namespace eCommerce.Api.Controllers.Admin
             existingProduct.UpdatedDate = DateTime.UtcNow;
 
             dbContext.SaveChanges();
-            return Ok("Ürün Güncelendi !");
+            return Ok("Ürün güncellendi!");
         }
     }
 }
