@@ -53,11 +53,11 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border StrokeShape="RoundRectangle 10,10,10,10">
+                    <Border StrokeShape="RoundRectangle 5,5,5,5">
                         <Grid>
                             <Image Aspect="Fill"
-                                   HeightRequest="270"
-                                   WidthRequest="320"
+                                   HeightRequest="200"
+                                   WidthRequest="200"
                                    Source="{Binding FullImageUrl}"/>
 
                             <Label TextColor="White"
