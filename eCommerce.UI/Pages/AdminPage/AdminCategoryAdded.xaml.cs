@@ -16,8 +16,6 @@ namespace eCommerce.UI.Pages.AdminPage
             {
                 BaseAddress = new Uri(AppSettings.ApiUrl)
             };
-
-            //_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         private async void OnAddCategoryButtonClicked(object sender, EventArgs e)

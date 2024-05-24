@@ -29,17 +29,11 @@ namespace eCommerce.UI.Pages.AdminPage
 
         private async Task<bool> DeleteProductAsync(string productId)
         {
-            var url = "http://192.168.1.104:5039/api/admin/Products/DeleteProduct";
-            var productRemoveDto = new { Id = productId };
-            var json = JsonConvert.SerializeObject(productRemoveDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var url = $"http://192.168.1.106:5039/api/admin/Products/DeleteProduct/{productId}";
 
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Delete, url)
-                {
-                    Content = content
-                };
+                var request = new HttpRequestMessage(HttpMethod.Delete, url);
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await _httpClient.SendAsync(request);
@@ -49,6 +43,11 @@ namespace eCommerce.UI.Pages.AdminPage
                     Console.WriteLine($"Error: {response.StatusCode}, Content: {responseContent}");
                 }
                 return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException httpEx)
+            {
+                Console.WriteLine($"HTTP Request Exception: {httpEx.Message}");
+                return false;
             }
             catch (Exception ex)
             {

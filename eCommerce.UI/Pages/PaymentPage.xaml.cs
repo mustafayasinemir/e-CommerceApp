@@ -26,18 +26,20 @@ namespace eCommerce.UI.Pages
 
         private void OnPayButtonClicked(object sender, EventArgs e)
         {
-            // Ödeme iþlemini gerçekleþtirme kodu buraya gelecek
+           
             DisplayAlert("Ödeme", "Ödeme süreci baþlatýldý.", "Tamam");
+            Navigation.PushAsync(new OrdersPage());
         }
 
         private string FormatCardNumber(string cardNumber)
         {
-            // Kart numarasýný 4 haneli gruplara ayýrma
+            
             if (string.IsNullOrWhiteSpace(cardNumber))
                 return string.Empty;
 
             cardNumber = cardNumber.Replace(" ", "");
             return string.Join(" ", cardNumber.Select((c, i) => i > 0 && i % 4 == 0 ? " " + c : c.ToString()));
         }
+
     }
 }

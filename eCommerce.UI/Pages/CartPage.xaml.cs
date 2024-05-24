@@ -44,6 +44,9 @@ public partial class CartPage : ContentPage
         }
 
         CvCart.ItemsSource = ShoppingCartItems;
+
+       
+
         UpdateTotalPrice();
     }
 
@@ -53,8 +56,6 @@ public partial class CartPage : ContentPage
         var totalPrice = ShoppingCartItems.Sum(item => item.Price * item.Qty);
         LblTotalPrice.Text = totalPrice.ToString();
     }
-
-
 
 
     private async void UpdateCartQuantity(int productId, string action)
@@ -114,7 +115,7 @@ public partial class CartPage : ContentPage
 
     private async void TapPlaceOrder_Tapped(object sender, TappedEventArgs e)
     {
-        Navigation.PushAsync(new PaymentPage());
+        
         var order = new Order()
         {
             Address = LblAddress.Text,
@@ -126,9 +127,9 @@ public partial class CartPage : ContentPage
        
         if (response)
         {
+
+            await Navigation.PushAsync(new PaymentPage());
             
-            await DisplayAlert("", "Sipariþiniz verildi", "Tamam");
-            Navigation.PushAsync(new OrdersPage());
             ShoppingCartItems.Clear();
         }
         else

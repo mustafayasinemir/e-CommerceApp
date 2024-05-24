@@ -2,6 +2,7 @@
 using eCommerce.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace eCommerce.Api.Controllers.Admin
 {
@@ -28,6 +29,7 @@ namespace eCommerce.Api.Controllers.Admin
                 ImageUrl = p.ImageUrl,
                 IsTrending = p.IsTrending,
                 IsBestSelling = p.IsBestSelling
+
             }).ToList();
 
             return Ok(products);
@@ -59,20 +61,20 @@ namespace eCommerce.Api.Controllers.Admin
         }
 
         [HttpPost("AddProduct")]
-        public IActionResult AddProduct(ProductAddedDto productDTO)
+        public IActionResult AddProduct(ProductAddedDto productDto)
         {
             if (ModelState.IsValid)
             {
                 var product = new Product
                 {
-                    Name = productDTO.Name,
-                    Detail = productDTO.Detail,
-                    ImageUrl = productDTO.ImageUrl,
-                    Price = productDTO.Price,
-                    IsTrending = productDTO.IsTrending,
-                    IsBestSelling = productDTO.IsBestSelling,
-                    CategoryId = productDTO.CategoryId,
-                    CreatedDate = DateTime.UtcNow // Set the current UTC time for CreatedDate
+                    Name = productDto.Name,
+                    Detail = productDto.Detail,
+                    ImageUrl = productDto.ImageUrl,
+                    Price = productDto.Price,
+                    IsTrending = productDto.IsTrending,
+                    IsBestSelling = productDto.IsBestSelling,
+                    CategoryId = productDto.CategoryId,
+                    CreatedDate = DateTime.UtcNow 
                 };
 
                 dbContext.Products.Add(product);
@@ -83,8 +85,8 @@ namespace eCommerce.Api.Controllers.Admin
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("DeleteProduct")]
-        public IActionResult DeleteProduct(ProductRemoveDto id)
+        [HttpDelete("[action]")]
+        public IActionResult DeleteProduct(int id)
         {
             var product = dbContext.Products.Find(id);
             if (product == null)
@@ -94,13 +96,13 @@ namespace eCommerce.Api.Controllers.Admin
 
             dbContext.Products.Remove(product);
             dbContext.SaveChanges();
-            return Ok("Ürün başarıyla silindi!");
+            return Ok("Kategori silindi!");
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id, Product product)
+        public IActionResult UpdateProduct(int id, ProductUpdateDto productUpdateDto)
         {
-            if (id != product.Id)
+            if (id != productUpdateDto.Id)
             {
                 return BadRequest();
             }
@@ -111,13 +113,13 @@ namespace eCommerce.Api.Controllers.Admin
                 return NotFound();
             }
 
-            existingProduct.Name = product.Name;
-            existingProduct.Detail = product.Detail;
-            existingProduct.ImageUrl = product.ImageUrl;
-            existingProduct.Price = product.Price;
-            existingProduct.IsTrending = product.IsTrending;
-            existingProduct.IsBestSelling = product.IsBestSelling;
-            existingProduct.CategoryId = product.CategoryId;
+            existingProduct.Name = productUpdateDto.Name;
+            existingProduct.Detail = productUpdateDto.Detail;
+            existingProduct.ImageUrl = productUpdateDto.ImageUrl;
+            existingProduct.Price = productUpdateDto.Price;
+            existingProduct.IsTrending = productUpdateDto.IsTrending;
+            existingProduct.IsBestSelling = productUpdateDto.IsBestSelling;
+            existingProduct.CategoryId = productUpdateDto.CategoryId;
             existingProduct.UpdatedDate = DateTime.UtcNow;
 
             dbContext.SaveChanges();

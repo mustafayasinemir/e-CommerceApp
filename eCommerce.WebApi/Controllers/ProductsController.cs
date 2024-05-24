@@ -56,4 +56,5 @@ public class ProductsController(ApiDbContext dbContext) : ControllerBase
         }).FirstOrDefault();
         return Ok(productData);
     }
+
 }
