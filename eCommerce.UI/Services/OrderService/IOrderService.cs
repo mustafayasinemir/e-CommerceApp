@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.UI.Models;
 
 namespace eCommerce.UI.Services.OrderService
 {
     public interface IOrderService
     {
+        Task<bool> PlaceOrder(Order order);
+        Task<List<OrderByUser>> GetOrdersByUser(int userId);
+        Task<List<OrderDetail>> GetOrderDetails(int orderId);
+
+
     }
 }

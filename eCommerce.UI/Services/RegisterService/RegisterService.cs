@@ -4,7 +4,7 @@ using System.Text;
 
 namespace eCommerce.UI.Services.RegisterService
 {
-    internal class RegisterService : IRegisterService
+    public class RegisterService : IRegisterService
     {
         public async Task<bool> RegisterUser(string name, string email, string phone, string password)
         {
