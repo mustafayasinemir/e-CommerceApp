@@ -1,5 +1,8 @@
 using eCommerce.UI.Models;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace eCommerce.UI.Pages.AdminPage
@@ -48,23 +51,27 @@ namespace eCommerce.UI.Pages.AdminPage
                 return;
             }
 
-            try
+            bool isConfirmed = await DisplayAlert("Onay", $"Kategoriyi silmek istediðinizden emin misiniz?\nKategori Adý: {selectedCategory.Name}", "Evet", "Hayýr");
+            if (isConfirmed)
             {
-                var response = await _httpClient.DeleteAsync(AppSettings.ApiUrl + $"api/admin/categories/DeleteCategory?id={selectedCategory.Id}");
+                try
+                {
+                    var response = await _httpClient.DeleteAsync(AppSettings.ApiUrl + $"api/admin/categories/DeleteCategory?id={selectedCategory.Id}");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    await DisplayAlert("Baþarýlý", "Kategori baþarýyla silindi.", "Tamam");
-                    LoadCategoriesAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Baþarýlý", "Kategori baþarýyla silindi.", "Tamam");
+                        LoadCategoriesAsync();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Hata", "Kategori silinirken bir hata oluþtu. Lütfen tekrar deneyin.", "Tamam");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    await DisplayAlert("Hata", "Kategori silinirken bir hata oluþtu. Lütfen tekrar deneyin.", "Tamam");
+                    await DisplayAlert("Hata", $"Hata oluþtu: {ex.Message}", "Tamam");
                 }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Hata", $"Hata oluþtu: {ex.Message}", "Tamam");
             }
         }
     }

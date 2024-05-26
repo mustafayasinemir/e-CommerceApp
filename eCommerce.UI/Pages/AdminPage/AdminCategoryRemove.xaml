@@ -20,7 +20,7 @@
 
             <Button 
                 Text="Kategoriyi Sil"
-                BackgroundColor="DarkRed"
+                BackgroundColor="#18565f"
                 TextColor="White"
                 Clicked="OnRemoveCategoryButtonClicked" />
         </VerticalStackLayout>

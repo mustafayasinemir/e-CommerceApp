@@ -1,17 +1,17 @@
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Text;
+ï»¿using eCommerce.UI.Services.ProductService;
 
 namespace eCommerce.UI.Pages.AdminPage
 {
     public partial class AdminProductRemove : ContentPage
     {
         private readonly HttpClient _httpClient;
+        private readonly ProductService _productService;
 
         public AdminProductRemove()
         {
             InitializeComponent();
             _httpClient = new HttpClient();
+            _productService = new ProductService();
         }
 
         private async void OnDeleteProductButtonClicked(object sender, EventArgs e)
@@ -19,40 +19,21 @@ namespace eCommerce.UI.Pages.AdminPage
             var productId = ProductIdEntry.Text;
             if (string.IsNullOrEmpty(productId))
             {
-                ResultLabel.Text = "Lütfen geçerli bir ürün ID girin.";
+                ResultLabel.Text = "LÃ¼tfen geÃ§erli bir Ã¼rÃ¼n ID girin.";
                 return;
             }
 
-            var isSuccess = await DeleteProductAsync(productId);
-            ResultLabel.Text = isSuccess ? "Ürün baþarýyla silindi!" : "Ürün silinirken bir hata oluþtu.";
-        }
-
-        private async Task<bool> DeleteProductAsync(string productId)
-        {
-            var url = $"http://192.168.1.106:5039/api/admin/Products/DeleteProduct/{productId}";
-
-            try
+            bool isConfirmed = await DisplayAlert("Onay", $"ID'si {productId} olan Ã¼rÃ¼nÃ¼ silmek istediÄŸinizden emin misiniz?", "Evet", "HayÄ±r");
+            if (isConfirmed)
             {
-                var request = new HttpRequestMessage(HttpMethod.Delete, url);
-                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var isSuccess = await _productService.DeleteProductAsync(productId);
+                ResultLabel.Text = isSuccess ? "ÃœrÃ¼n baÅŸarÄ±yla silindi!" : "ÃœrÃ¼n silinirken bir hata oluÅŸtu.";
 
-                var response = await _httpClient.SendAsync(request);
-                if (!response.IsSuccessStatusCode)
+                if (isSuccess)
                 {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Error: {response.StatusCode}, Content: {responseContent}");
+                    
+                    await Navigation.PushAsync(new AdminHomePage());
                 }
-                return response.IsSuccessStatusCode;
-            }
-            catch (HttpRequestException httpEx)
-            {
-                Console.WriteLine($"HTTP Request Exception: {httpEx.Message}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex.Message}");
-                return false;
             }
         }
     }

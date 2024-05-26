@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using eCommerce.UI.Pages.AdminPage;
+using eCommerce.UI.Services.CategoryService;
+using Microsoft.Extensions.Logging;
 
 namespace eCommerce.UI
 {
@@ -14,9 +16,11 @@ namespace eCommerce.UI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+          
+
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
