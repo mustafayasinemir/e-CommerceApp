@@ -10,6 +10,6 @@
         public bool? IsTrending { get; set; } = false;
         public bool? IsBestSelling { get; set; } = false;
         public int? CategoryId { get; set; }
-        public DateTime? UpdatedDate { get; set; } = DateTime.Now;
+        public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
     }
 }

@@ -9,7 +9,7 @@
         public bool IsTrending { get; set; } 
         public bool IsBestSelling { get; set; } 
         public int CategoryId { get; set; }
-        public DateTime CreatedDate { get; set; }
-      
+        public DateTime CreatedDate { get; set; }= DateTime.UtcNow;
+
     }
 }

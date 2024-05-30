@@ -13,9 +13,9 @@ namespace eCommerce.Api.Models
         public bool? IsBestSelling { get; set; } = false;
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
-        public DateTime CreatedDate { get; set; }= DateTime.Now;
-        public DateTime? RemoveDate { get; set; }= DateTime.Now;
-        public DateTime? UpdatedDate { get; set; }=DateTime.Now;
+        public DateTime CreatedDate { get; set; }= DateTime.UtcNow;
+        public DateTime? RemoveDate { get; set; }= DateTime.UtcNow;
+        public DateTime? UpdatedDate { get; set; }= DateTime.UtcNow;
 
 
         [JsonIgnore]
