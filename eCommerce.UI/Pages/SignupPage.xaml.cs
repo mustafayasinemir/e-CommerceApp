@@ -5,27 +5,28 @@ namespace eCommerce.UI.Pages;
 
 public partial class SignupPage : ContentPage
 {
-	public SignupPage()
-	{
-		InitializeComponent();
-	}
+    public SignupPage()
+    {
+        InitializeComponent();
+    }
 
     private async void BtnSignup_Clicked(object sender, EventArgs e)
-	{
-        RegisterService RegisterService =new RegisterService();
+    {
+        if (IsValid())
+        {
+            var registerService = new RegisterService();
+            var response = await registerService.RegisterUser(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
 
-		var response = await RegisterService.RegisterUser(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
-
-        if (response)
-		{
-			await DisplayAlert("", "Hesabýnýz oluþturuldu", "Tamam");
-			await Navigation.PushAsync(new LoginPage());
-		}
-		else
-		{
-            await DisplayAlert("", "Üzgünüz!Bir þeyler yanlýþ gitti! ", "Kapat");
+            if (response)
+            {
+                await DisplayAlert("", "Hesabýnýz oluþturuldu", "Tamam");
+                await Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await DisplayAlert("", "Üzgünüz! Bir þeyler yanlýþ gitti!", "Kapat");
+            }
         }
-		
     }
 
     private async void TapLogin_Tapped(object sender, TappedEventArgs e)
@@ -33,16 +34,35 @@ public partial class SignupPage : ContentPage
         await Navigation.PushAsync(new LoginPage());
     }
 
-    private void EntEmail_TextChanged(object sender, TextChangedEventArgs e)
+    private bool IsValid()
     {
-      
+        if (string.IsNullOrWhiteSpace(EntName.Text) ||
+            string.IsNullOrWhiteSpace(EntEmail.Text) ||
+            string.IsNullOrWhiteSpace(EntPhone.Text) ||
+            string.IsNullOrWhiteSpace(EntPassword.Text))
+        {
+            DisplayAlert("Geçersiz Giriþ", "Lütfen tüm alanlarý doldurun.", "Kapat");
+            return false;
+        }
+
+        if (!IsValidEmail(EntEmail.Text))
+        {
+            DisplayAlert("Geçersiz E-posta", "Lütfen geçerli bir e-posta adresi girin.", "Kapat");
+            return false;
+        }
+
+        if (EntPassword.Text.Length < 6)
+        {
+            DisplayAlert("Geçersiz Þifre", "Þifre en az 6 karakter uzunluðunda olmalýdýr.", "Kapat");
+            return false;
+        }
+
+        return true;
     }
 
-
-    private void EntPassword_TextChanged(object sender, TextChangedEventArgs e)
+    private bool IsValidEmail(string email)
     {
-        
+        var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        return emailRegex.IsMatch(email);
     }
-
-
 }

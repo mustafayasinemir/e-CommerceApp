@@ -97,16 +97,21 @@ public partial class CartPage : ContentPage
         }
     }
 
-    private void BtnDelete_Clicked(object sender, EventArgs e)
+    private async void BtnDelete_Clicked(object sender, EventArgs e)
     {
         if (sender is ImageButton button && button.BindingContext is ShoppingCartItem cartItem)
         {
+            bool answer = await DisplayAlert("Ürünü Sil", "Silmek istediðinizden emin misiniz?", "Evet", "Hayýr");
 
-            ShoppingCartItems.Remove(cartItem);
-            UpdateTotalPrice();
-            UpdateCartQuantity(cartItem.ProductId, "delete");
+            if (answer)
+            {
+                ShoppingCartItems.Remove(cartItem);
+                UpdateTotalPrice();
+                UpdateCartQuantity(cartItem.ProductId, "delete");
+            }
         }
     }
+
 
     private void BtnEditAddress_Clicked(object sender, EventArgs e)
     {

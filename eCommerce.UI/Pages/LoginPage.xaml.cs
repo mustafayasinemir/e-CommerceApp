@@ -1,4 +1,5 @@
 using eCommerce.UI.Services.LoginService;
+using System.Text.RegularExpressions;
 
 namespace eCommerce.UI.Pages;
 
@@ -11,15 +12,18 @@ public partial class LoginPage : ContentPage
 
     private async void BtnSignIn_Clicked(object sender, EventArgs e)
     {
-        var LoginService=new LoginService();
-        var response = await LoginService.Login(EntEmail.Text, EntPassword.Text);
-        if (response)
+        if (IsValid())
         {
-            Application.Current.MainPage = new AppShell();  
-        }
-        else
-        {
-            await DisplayAlert("", "Üzgünüz,Bir þeyler yanlýþ gitti!", "Kapat");
+            var loginService = new LoginService();
+            var response = await loginService.Login(EntEmail.Text, EntPassword.Text);
+            if (response)
+            {
+                Application.Current.MainPage = new AppShell();
+            }
+            else
+            {
+                await DisplayAlert("", "Üzgünüz, bir þeyler yanlýþ gitti!", "Kapat");
+            }
         }
     }
 
@@ -27,9 +31,38 @@ public partial class LoginPage : ContentPage
     {
         await Navigation.PushAsync(new SignupPage());
     }
+
     private async void ForgotPassword_Tapped(object sender, EventArgs e)
     {
-       // await Navigation.PushAsync(new ForgotPasswordPage());
+        // await Navigation.PushAsync(new ForgotPasswordPage());
     }
 
+    private bool IsValid()
+    {
+        if (string.IsNullOrWhiteSpace(EntEmail.Text) || string.IsNullOrWhiteSpace(EntPassword.Text))
+        {
+            DisplayAlert("Geçersiz Giriþ", "Lütfen tüm alanlarý doldurun.", "Kapat");
+            return false;
+        }
+
+        if (!IsValidEmail(EntEmail.Text))
+        {
+            DisplayAlert("Geçersiz E-posta", "Lütfen geçerli bir e-posta adresi girin.", "Kapat");
+            return false;
+        }
+
+        if (EntPassword.Text.Length < 6)
+        {
+            DisplayAlert("Geçersiz Þifre", "Þifre en az 6 karakter uzunluðunda olmalýdýr.", "Kapat");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        return emailRegex.IsMatch(email);
+    }
 }
