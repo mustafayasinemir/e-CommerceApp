@@ -31,8 +31,8 @@
                 <DataTemplate>
                     <VerticalStackLayout>
                         <Border  StrokeShape="RoundRectangle 10">
-                            <Image HeightRequest="90"
-                                   WidthRequest="90"
+                            <Image HeightRequest="75"
+                                   WidthRequest="75"
                                    Source="{Binding FullImageUrl}" />
                         </Border>
                         <Label HorizontalOptions="Center"
@@ -42,22 +42,25 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+    
         <CollectionView x:Name="CvBestSelling"
                         Grid.Row="3"
                         SelectionMode="Single"
                         SelectionChanged="BestSelling_SelectionChanged">
+            
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="10" />
             </CollectionView.ItemsLayout>
+            
             <CollectionView.ItemTemplate>
+                
                 <DataTemplate>
                     <Border StrokeShape="RoundRectangle 5,5,5,5">
                         <Grid>
                             <Image Aspect="Fill"
-                                   HeightRequest="200"
-                                   WidthRequest="200"
+                                   HeightRequest="90"
+                                   WidthRequest="100"
                                    Source="{Binding FullImageUrl}"/>
 
                             <Label TextColor="White"
